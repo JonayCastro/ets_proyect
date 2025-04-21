@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,4 +27,13 @@ public class User {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_favorites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "movie_id"})
+    )
+    private Set<FavoriteMovies> favorites;
 }

@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -20,4 +23,9 @@ public class FavoriteMovies {
 
     @Column(name="description", nullable = true)
     private String description;
+
+    @ManyToMany(mappedBy = "favorites")
+    private Set<User> users = new HashSet<>();
+
+
 }
