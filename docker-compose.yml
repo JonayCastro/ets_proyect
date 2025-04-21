@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mysqlserver:
+    image: mysql:8.0.23
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=ets
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_USER=ets
+      - MYSQL_PASSWORD=ets
+      - MYSQL_DATABASE=ets
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_config:/etc/mysql/conf.d
+    container_name: ETS_PROJECT
+volumes:
+  mysql_data:
+  mysql_config:
