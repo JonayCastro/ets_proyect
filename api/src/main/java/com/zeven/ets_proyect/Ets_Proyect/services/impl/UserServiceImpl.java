@@ -8,8 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -25,5 +23,12 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void createUser(UserDTO userDTO) {
         this.userRepository.save(mapper.map(userDTO, User.class));
+    }
+
+    @Override
+    public UserDTO login(UserDTO userDTO) {
+        User userFound = this.userRepository.findByNameAndPassword(userDTO.getName(), userDTO.getPassword())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return mapper.map(userFound, UserDTO.class);
     }
 }

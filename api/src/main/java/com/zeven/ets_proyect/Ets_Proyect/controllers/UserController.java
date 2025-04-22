@@ -28,7 +28,14 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
 
-
+    @PostMapping(path = "/login")
+    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+        try {
+            return ResponseEntity.ok(this.userService.login(userDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Acceso no permitido");
+        }
     }
 }

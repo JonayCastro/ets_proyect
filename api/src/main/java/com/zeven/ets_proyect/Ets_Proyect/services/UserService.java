@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface UserService {
 
     void createUser(UserDTO userDTO);
+    UserDTO login(UserDTO userDTO);
 }
