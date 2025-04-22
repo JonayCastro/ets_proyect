@@ -19,7 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private Long idUser;
 
     @Column(name = "name", unique = true, nullable = false)
@@ -32,8 +32,8 @@ public class User {
     @JoinTable(
             name = "user_favorites",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "movie_id"})
+            inverseJoinColumns = @JoinColumn(name = "favorite_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "favorite_id"})
     )
-    private Set<FavoriteMovies> favorites;
+    private Set<FavoriteSneaker> favorites;
 }
