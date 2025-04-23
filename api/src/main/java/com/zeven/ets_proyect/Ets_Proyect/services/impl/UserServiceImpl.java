@@ -1,8 +1,10 @@
 package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
+import com.zeven.ets_proyect.Ets_Proyect.dto.SneakersResponseDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.User;
 import com.zeven.ets_proyect.Ets_Proyect.repositories.UserRepository;
+import com.zeven.ets_proyect.Ets_Proyect.services.SupplierCatalogServices;
 import com.zeven.ets_proyect.Ets_Proyect.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper mapper;
+    private final SupplierCatalogServices supplierCatalogServices;
 
-    UserServiceImpl(UserRepository userRepository, ModelMapper mapper){
+    UserServiceImpl(UserRepository userRepository, ModelMapper mapper, SupplierCatalogServices supplierCatalogServices){
         this.userRepository = userRepository;
         this.mapper = mapper;
+        this.supplierCatalogServices = supplierCatalogServices;
     }
 
     @Override
@@ -26,9 +30,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO login(UserDTO userDTO) {
+    public SneakersResponseDTO login(UserDTO userDTO) {
         User userFound = this.userRepository.findByNameAndPassword(userDTO.getName(), userDTO.getPassword())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        return mapper.map(userFound, UserDTO.class);
+
+        return this.supplierCatalogServices.getSneakerList();
+
     }
 }

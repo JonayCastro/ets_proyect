@@ -26,13 +26,14 @@ public class FavoriteSneaker {
     @Column(name="origin_id", unique = true, nullable = false)
     private Long originId;
 
+    @Column(name ="origin_collection_id", nullable = false)
+    private Long originCollectionId;
+
     private String name;
 
     private String brand;
 
     private String size;
-
-    private String color;
 
     private Integer price;
 
