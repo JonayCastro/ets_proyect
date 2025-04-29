@@ -1,5 +1,6 @@
 package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
+import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
 import com.zeven.ets_proyect.Ets_Proyect.dto.SneakersResponseDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.User;
@@ -45,10 +46,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public SneakersResponseDTO login(final UserDTO userDTO) {
         User userFound = this.userRepository.findByName(userDTO.getName())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new RuntimeException(ApiMessage.USER_NOT_FOUND));
 
         if (!passwordEncoder.matches(userDTO.getPassword(), userFound.getPassword())) {
-            throw new RuntimeException("Contraseña incorrecta");
+            throw new RuntimeException(ApiMessage.BAD_CREDENTIALS);
         }
 
         return this.supplierCatalogServices.getSneakerList();
