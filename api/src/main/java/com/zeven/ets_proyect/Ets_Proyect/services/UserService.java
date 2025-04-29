@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface UserService {
 
     void createUser(UserDTO userDTO);
+    String encryptPassword(String originalPassword);
     SneakersResponseDTO login(UserDTO userDTO);
 }

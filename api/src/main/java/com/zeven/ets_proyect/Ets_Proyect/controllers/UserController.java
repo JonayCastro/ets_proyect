@@ -24,7 +24,7 @@ public class UserController {
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO){
         try {
             this.userService.createUser(userDTO);
-            return ResponseEntity.ok(userDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body("User created");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
