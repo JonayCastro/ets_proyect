@@ -2,6 +2,7 @@ package com.zeven.ets_proyect.Ets_Proyect.controllers;
 
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPaths;
+import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteCtrlDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 import com.zeven.ets_proyect.Ets_Proyect.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -22,22 +23,24 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(path = ApiPaths.CREATE_PATH, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO){
+    @PostMapping(path = ApiPaths.ADD_FAVORITE_PATH)
+    public ResponseEntity<?> addFavorite(@RequestBody FavoriteCtrlDTO favoriteCtrlDTO){
         try {
-            this.userService.createUser(userDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(ApiMessage.USER_CREATED);
+            this.userService.addFavoriteToUser(favoriteCtrlDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(ApiMessage.FAVORITE_ADDED);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiMessage.FAVORITE_CANT_BE_ADDED);
         }
     }
 
-    @PostMapping(path = ApiPaths.LOGIN_PATH)
-    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+    @PostMapping(path = ApiPaths.REMOVE_FAVORITE_PATH)
+    public ResponseEntity<?> removeFavorite(@RequestBody FavoriteCtrlDTO favoriteCtrlDTO){
         try {
-            return ResponseEntity.ok(this.userService.login(userDTO));
+            this.userService.addFavoriteToUser(favoriteCtrlDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(ApiMessage.FAVORITE_REMOVED);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiMessage.ACCESS_DENIED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiMessage.FAVORITE_CANT_BE_REMOVED);
         }
     }
+
 }
