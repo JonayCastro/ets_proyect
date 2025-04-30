@@ -2,14 +2,13 @@ package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
 import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteCtrlDTO;
-import com.zeven.ets_proyect.Ets_Proyect.dto.SneakersResponseDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.FavoriteSneaker;
 import com.zeven.ets_proyect.Ets_Proyect.entities.User;
 import com.zeven.ets_proyect.Ets_Proyect.repositories.UserRepository;
 import com.zeven.ets_proyect.Ets_Proyect.services.FavoriteService;
-import com.zeven.ets_proyect.Ets_Proyect.services.SupplierCatalogServices;
 import com.zeven.ets_proyect.Ets_Proyect.services.UserService;
+import com.zeven.ets_proyect.Ets_Proyect.utils.JwtUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,20 +19,20 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper mapper;
-    private final SupplierCatalogServices supplierCatalogServices;
     private final PasswordEncoder passwordEncoder;
     private final FavoriteService favoriteService;
+    private final JwtUtil jwtUtil;
 
     UserServiceImpl(UserRepository userRepository,
                     ModelMapper mapper,
-                    SupplierCatalogServices supplierCatalogServices,
                     PasswordEncoder passwordEncoder,
-                    FavoriteService favoriteService){
+                    FavoriteService favoriteService,
+                    JwtUtil jwtUtil){
         this.userRepository = userRepository;
         this.mapper = mapper;
-        this.supplierCatalogServices = supplierCatalogServices;
         this.passwordEncoder = passwordEncoder;
         this.favoriteService = favoriteService;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -50,7 +49,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SneakersResponseDTO login(final UserDTO userDTO) {
+    public String login(final UserDTO userDTO) {
+        String bearerPrefix = "Bearer ";
         User userFound = this.userRepository.findByName(userDTO.getName())
                 .orElseThrow(() -> new RuntimeException(ApiMessage.USER_NOT_FOUND));
 
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(ApiMessage.BAD_CREDENTIALS);
         }
 
-        return this.supplierCatalogServices.getSneakerList();
+        return bearerPrefix + this.jwtUtil.generateToken(userDTO.getName());
     }
 
     @Override

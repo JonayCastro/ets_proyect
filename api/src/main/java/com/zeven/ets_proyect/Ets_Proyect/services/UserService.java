@@ -10,7 +10,7 @@ public interface UserService {
 
     void createUser(UserDTO userDTO);
     String encryptPassword(String originalPassword);
-    SneakersResponseDTO login(UserDTO userDTO);
+    String login(UserDTO userDTO);
     void addFavoriteToUser(FavoriteCtrlDTO favoriteCtrlDTO);
     void removeFavoriteFromUser(FavoriteCtrlDTO favoriteCtrlDTO);
 }

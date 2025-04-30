@@ -36,7 +36,7 @@ public class UserController {
     @PostMapping(path = ApiPaths.REMOVE_FAVORITE_PATH)
     public ResponseEntity<?> removeFavorite(@RequestBody FavoriteCtrlDTO favoriteCtrlDTO){
         try {
-            this.userService.addFavoriteToUser(favoriteCtrlDTO);
+            this.userService.removeFavoriteFromUser(favoriteCtrlDTO);
             return ResponseEntity.status(HttpStatus.OK).body(ApiMessage.FAVORITE_REMOVED);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiMessage.FAVORITE_CANT_BE_REMOVED);

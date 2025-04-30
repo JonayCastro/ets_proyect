@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping(path = ApiPaths.ACCOUNT_PATH)
 public class AccountController {
@@ -36,7 +38,8 @@ public class AccountController {
     @PostMapping(path = ApiPaths.LOGIN_PATH)
     public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
         try {
-            return ResponseEntity.ok(this.userService.login(userDTO));
+            String token = userService.login(userDTO);
+            return ResponseEntity.ok(Map.of("token", token));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiMessage.ACCESS_DENIED);
         }
