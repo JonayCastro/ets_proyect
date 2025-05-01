@@ -1,4 +1,4 @@
-package com.zeven.ets_proyect.Ets_Proyect.dto;
+package com.zeven.ets_proyect.Ets_Proyect.dto.sneakers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SneakerDTO {
+
+    private Long sneakerId;
 
     @JsonProperty("id_product")
     private Long originId;

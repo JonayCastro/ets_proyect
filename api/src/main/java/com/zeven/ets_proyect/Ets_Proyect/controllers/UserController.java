@@ -3,7 +3,7 @@ package com.zeven.ets_proyect.Ets_Proyect.controllers;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPathVariables;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPaths;
-import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteSneakerDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteSneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

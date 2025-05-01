@@ -1,6 +1,5 @@
-package com.zeven.ets_proyect.Ets_Proyect.dto;
+package com.zeven.ets_proyect.Ets_Proyect.dto.sneakers;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class FavoriteSneakerDTO extends SneakerDTO{
+public class FavoriteSneakerDTO extends SneakerDTO {
 
     private Long idFavorite;
 }

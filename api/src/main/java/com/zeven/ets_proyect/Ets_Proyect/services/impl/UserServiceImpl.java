@@ -1,7 +1,7 @@
 package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
-import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteSneakerDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteSneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.FavoriteSneaker;
 import com.zeven.ets_proyect.Ets_Proyect.entities.User;

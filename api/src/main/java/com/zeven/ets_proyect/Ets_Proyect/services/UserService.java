@@ -1,6 +1,6 @@
 package com.zeven.ets_proyect.Ets_Proyect.services;
 
-import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteSneakerDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteSneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 
 public interface UserService {
