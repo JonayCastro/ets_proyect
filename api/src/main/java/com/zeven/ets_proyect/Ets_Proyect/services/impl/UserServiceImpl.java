@@ -1,15 +1,16 @@
 package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
-import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteCtrlDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteSneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.FavoriteSneaker;
 import com.zeven.ets_proyect.Ets_Proyect.entities.User;
+import com.zeven.ets_proyect.Ets_Proyect.repositories.FavoriteSneakersRepository;
 import com.zeven.ets_proyect.Ets_Proyect.repositories.UserRepository;
-import com.zeven.ets_proyect.Ets_Proyect.services.FavoriteService;
 import com.zeven.ets_proyect.Ets_Proyect.services.UserService;
 import com.zeven.ets_proyect.Ets_Proyect.utils.JwtUtil;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,19 +21,19 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper mapper;
     private final PasswordEncoder passwordEncoder;
-    private final FavoriteService favoriteService;
     private final JwtUtil jwtUtil;
+    private final FavoriteSneakersRepository favoriteSneakersRepository;
 
     UserServiceImpl(UserRepository userRepository,
                     ModelMapper mapper,
                     PasswordEncoder passwordEncoder,
-                    FavoriteService favoriteService,
-                    JwtUtil jwtUtil){
+                    JwtUtil jwtUtil,
+                    FavoriteSneakersRepository favoriteSneakersRepository){
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.passwordEncoder = passwordEncoder;
-        this.favoriteService = favoriteService;
         this.jwtUtil = jwtUtil;
+        this.favoriteSneakersRepository = favoriteSneakersRepository;
     }
 
     @Override
@@ -58,27 +59,25 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(ApiMessage.BAD_CREDENTIALS);
         }
 
-        return bearerPrefix + this.jwtUtil.generateToken(userDTO.getName());
+        return bearerPrefix + this.jwtUtil.generateToken(userFound.getIdUser());
     }
 
     @Override
-    public void addFavoriteToUser(FavoriteCtrlDTO favoriteCtrlDTO) {
-        User user = userRepository.findById(favoriteCtrlDTO.getFavoriteId())
-                .orElseThrow(() -> new RuntimeException(ApiMessage.USER_NOT_FOUND));
+    public void addFavoriteToUser(FavoriteSneakerDTO favoriteSneakerDTO) {
+        Long userId = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
 
-        FavoriteSneaker favorite = this.favoriteService.getFavoriteById(favoriteCtrlDTO.getFavoriteId());
-        user.getFavorites().add(favorite);
-        userRepository.save(user);
+        User user = this.userRepository.findByIdUser(userId).orElseThrow(() ->
+                new RuntimeException(ApiMessage.USER_NOT_FOUND));
+
+        FavoriteSneaker favoriteSneaker = this.mapper.map(favoriteSneakerDTO, FavoriteSneaker.class);
+        favoriteSneaker.setUser(user);
+        this.favoriteSneakersRepository.save(favoriteSneaker);
     }
 
     @Override
-    public void removeFavoriteFromUser(FavoriteCtrlDTO favoriteCtrlDTO) {
-        User user = userRepository.findById(favoriteCtrlDTO.getUserId())
-                .orElseThrow(() -> new RuntimeException(ApiMessage.USER_NOT_FOUND));
-
-        FavoriteSneaker favorite = this.favoriteService.getFavoriteById(favoriteCtrlDTO.getFavoriteId());
-        user.getFavorites().remove(favorite);
-        userRepository.save(user);
-
+    public void deleteFavoriteById(Long favoriteSneakerId) {
+        FavoriteSneaker favoriteSneaker = this.favoriteSneakersRepository.findById(favoriteSneakerId).orElseThrow(() ->
+                new RuntimeException(ApiMessage.FAVORITE_NOT_FOUND));
+        this.favoriteSneakersRepository.delete(favoriteSneaker);
     }
 }

@@ -3,6 +3,7 @@ package com.zeven.ets_proyect.Ets_Proyect.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -32,12 +33,6 @@ public class User {
     @Column(name = "contact")
     private String contact;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_favorites",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "favorite_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "favorite_id"})
-    )
-    private Set<FavoriteSneaker> favorites;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<FavoriteSneaker> favorites = new HashSet<>();
 }

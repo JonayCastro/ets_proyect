@@ -2,11 +2,15 @@ package com.zeven.ets_proyect.Ets_Proyect.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -40,8 +44,9 @@ public class FavoriteSneaker {
     @Column(name = "image_path")
     private String imagePath;
 
-    @ManyToMany(mappedBy = "favorites")
-    private Set<User> users = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
 
 }
