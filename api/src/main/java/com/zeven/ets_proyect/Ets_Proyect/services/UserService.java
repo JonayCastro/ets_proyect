@@ -5,9 +5,10 @@ import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 
 public interface UserService {
 
-    void createUser(UserDTO userDTO);
+    String createUser(UserDTO userDTO);
     String encryptPassword(String originalPassword);
     String login(UserDTO userDTO);
     void addFavoriteToUser(FavoriteSneakerDTO favoriteSneakerDTO);
     void deleteFavoriteById(Long favoriteSneakerId);
+    void updateChatId(String contact, Long chatId);
 }

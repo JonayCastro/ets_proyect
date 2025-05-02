@@ -30,8 +30,11 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "contact")
+    @Column(name = "contact", nullable = false)
     private String contact;
+
+    @Column(name = "chat_id")
+    private Long chatId;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FavoriteSneaker> favorites = new HashSet<>();

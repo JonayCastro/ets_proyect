@@ -9,6 +9,7 @@ import com.zeven.ets_proyect.Ets_Proyect.repositories.FavoriteSneakersRepository
 import com.zeven.ets_proyect.Ets_Proyect.repositories.UserRepository;
 import com.zeven.ets_proyect.Ets_Proyect.services.UserService;
 import com.zeven.ets_proyect.Ets_Proyect.utils.JwtUtil;
+import com.zeven.ets_proyect.Ets_Proyect.utils.Telegram;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,25 +24,41 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final FavoriteSneakersRepository favoriteSneakersRepository;
+    private final Telegram telegram;
 
     UserServiceImpl(UserRepository userRepository,
                     ModelMapper mapper,
                     PasswordEncoder passwordEncoder,
                     JwtUtil jwtUtil,
-                    FavoriteSneakersRepository favoriteSneakersRepository){
+                    FavoriteSneakersRepository favoriteSneakersRepository,
+                    Telegram telegram){
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
         this.favoriteSneakersRepository = favoriteSneakersRepository;
+        this.telegram = telegram;
     }
 
     @Override
     @Transactional
-    public void createUser(final UserDTO userDTO) {
+    public String createUser(final UserDTO userDTO) {
         String encryptedPassword = this.encryptPassword(userDTO.getPassword());
         userDTO.setPassword(encryptedPassword);
+        String userName = userDTO.getName();
+        if (!this.isValid(userName)){
+            throw new RuntimeException(ApiMessage.USER_NAME_NOT_PERMITTED);
+        }
+        String userContact = this.telegram.generateContact(userName);
+        userDTO.setContact(userContact);
         this.userRepository.save(mapper.map(userDTO, User.class));
+
+        return this.telegram.generateRegisterUrl(userContact);
+    }
+
+    private boolean isValid(String userName) {
+        String regex = "^[a-zA-Z0-9._-]+$";
+        return userName != null && userName.matches(regex) && userName.length() <= 8;
     }
 
     @Override
@@ -79,5 +96,14 @@ public class UserServiceImpl implements UserService {
         FavoriteSneaker favoriteSneaker = this.favoriteSneakersRepository.findById(favoriteSneakerId).orElseThrow(() ->
                 new RuntimeException(ApiMessage.FAVORITE_NOT_FOUND));
         this.favoriteSneakersRepository.delete(favoriteSneaker);
+    }
+
+    @Override
+    public void updateChatId(String contact, Long chatId) {
+        User userEntity = this.userRepository.findByContact(contact).orElseThrow(() ->
+                new RuntimeException(ApiMessage.CONTACT_NOT_FOUND));
+
+        userEntity.setChatId(chatId);
+        this.userRepository.save(userEntity);
     }
 }

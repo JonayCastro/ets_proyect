@@ -28,8 +28,8 @@ public class AccountController {
     @PostMapping(path = ApiPaths.CREATE_PATH, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO){
         try {
-            this.userService.createUser(userDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(ApiMessage.USER_CREATED);
+            String registerBotUrl = this.userService.createUser(userDTO);
+            return ResponseEntity.ok(Map.of("url", registerBotUrl));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
