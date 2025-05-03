@@ -50,10 +50,12 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(ApiMessage.USER_NAME_NOT_PERMITTED);
         }
         String userContact = this.telegram.generateContact(userName);
+        String urlChatBot = this.telegram.generateRegisterUrl(userContact);
         userDTO.setContact(userContact);
+        userDTO.setUrlChatBot(urlChatBot);
         this.userRepository.save(mapper.map(userDTO, User.class));
 
-        return this.telegram.generateRegisterUrl(userContact);
+        return urlChatBot;
     }
 
     private boolean isValid(String userName) {

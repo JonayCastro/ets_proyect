@@ -13,4 +13,5 @@ public class UserDTO {
     private String password;
     private String contact;
     private Long chatId;
+    private String urlChatBot;
 }

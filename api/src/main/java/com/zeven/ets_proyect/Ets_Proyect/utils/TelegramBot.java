@@ -6,6 +6,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.text.MessageFormat;
+
 public class TelegramBot extends TelegramLongPollingBot {
 
     private final String token;
@@ -42,7 +44,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 
                     SendMessage confirmation = new SendMessage();
                     confirmation.setChatId(chatId.toString());
-                    confirmation.setText("✅ Notificaciones activadas para tu cuenta.");
+                    String msg = MessageFormat.format("✅ Notificaciones activadas para tu cuenta {0}.", contact.replace("ets_proyect_", ""));
+                    confirmation.setText(msg);
 
                     try {
                         execute(confirmation);

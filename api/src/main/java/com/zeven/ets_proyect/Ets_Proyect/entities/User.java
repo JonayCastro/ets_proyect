@@ -36,6 +36,9 @@ public class User {
     @Column(name = "chat_id")
     private Long chatId;
 
+    @Column(name = "url_chat_bot")
+    private String urlChatBot;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FavoriteSneaker> favorites = new HashSet<>();
 }
