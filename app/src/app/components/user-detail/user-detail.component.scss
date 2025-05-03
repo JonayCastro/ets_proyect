@@ -1,0 +1,16 @@
+@use '../../../styles/variables' as *;
+
+mat-card {
+    margin: 20px;
+    background-color: $card-color;
+  
+    h2 {
+      color: $primary-color;
+    }
+  
+    p {
+      margin-bottom: 10px;
+      color: $text-color;
+    }
+  }
+  

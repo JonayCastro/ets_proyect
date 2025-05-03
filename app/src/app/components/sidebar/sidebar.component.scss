@@ -1,0 +1,15 @@
+@use '../../../styles/variables' as *;
+
+mat-nav-list {
+    padding: 10px;
+  
+    a {
+      color: $text-color;
+      font-weight: 500;
+  
+      &:hover {
+        background-color: lighten($primary-color, 40%);
+      }
+    }
+  }
+  

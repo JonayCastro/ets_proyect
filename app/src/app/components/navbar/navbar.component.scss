@@ -1,0 +1,16 @@
+@use '../../../styles/variables' as *;
+
+mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: $primary-color;
+  
+    .toolbar-title {
+      font-weight: bold;
+    }
+  
+    mat-icon {
+      cursor: pointer;
+    }
+  }
+  
