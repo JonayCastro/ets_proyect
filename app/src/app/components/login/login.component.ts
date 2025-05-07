@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../services/login-services/login.service';
 import UserDTO from '../../dto/user-dto';
 import { Router } from '@angular/router';
+import { DataTransferService } from '../../services/data-transfer/data-transfer.service';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +15,14 @@ export class LoginComponent {
   userDTO: UserDTO = new UserDTO({});
   private _snackBar = inject(MatSnackBar);
 
-  constructor(private loginServices: LoginService, private router: Router) {}
+  constructor(private loginServices: LoginService, private router: Router, private dataTransferService: DataTransferService) {}
 
 
   login() {
     this.loginServices.login(this.userDTO).subscribe({
       next: (response) => {
         const token: string = response.token;
-        localStorage.setItem('token', token);
+        this.saveToken(token);
         this.router.navigate(['/dashboard']);
       },
       error: (error) => {
@@ -31,17 +32,23 @@ export class LoginComponent {
 
   }
 
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
   createAccount() {
-    this.router.navigate(['/dashboard']);
-    // this.loginServices.createAccount(this.userDTO).subscribe({
-    //   next: (response) => {
-    //     this.router.navigate(['/dashboard']);
-    //     console.log('Account created successfully', response);
-    //   },
-    //   error: (error) => {
-    //     console.error('Account creation failed', error);
-    //   }
-    // })
+    this.loginServices.createAccount(this.userDTO).subscribe({
+      next: (response) => {
+        this.dataTransferService.setData(response.url);
+        const token: string = response.token;
+        this.saveToken(token);
+        this.showSnakcBar('Account created successfully');
+        this.router.navigate(['/dashboard/subscription']);
+      },
+      error: (error) => {
+        this.showSnakcBar('Account creation failed')
+      }
+    })
   }
 
   showSnakcBar(message: string) {

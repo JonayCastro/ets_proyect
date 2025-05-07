@@ -3,6 +3,7 @@ package com.zeven.ets_proyect.Ets_Proyect.controllers;
 
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPaths;
+import com.zeven.ets_proyect.Ets_Proyect.dto.LoginDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 import com.zeven.ets_proyect.Ets_Proyect.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -28,8 +29,8 @@ public class AccountController {
     @PostMapping(path = ApiPaths.CREATE_PATH, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO){
         try {
-            String registerBotUrl = this.userService.createUser(userDTO);
-            return ResponseEntity.ok(Map.of("url", registerBotUrl));
+            LoginDTO registerBotUrl = this.userService.createUser(userDTO);
+            return ResponseEntity.ok(registerBotUrl);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
