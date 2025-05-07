@@ -8,8 +8,7 @@ import { AuthGuard } from './auth/guard/guards.guard';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 
 const routes: Routes = [
-  //{ path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '', redirectTo: 'dashboard/subscription', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
