@@ -1,16 +1,21 @@
-<mat-card class="login-card">
-    <h2>Iniciar sesión</h2>
-    <form>
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Correo electrónico</mat-label>
-        <input matInput type="email" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Contraseña</mat-label>
-        <input matInput type="password" required>
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" class="full-width">Entrar</button>
-    </form>
-  </mat-card>
+
+<div class="app-icon-container">
+  <img src="assets/images/app-icon.png" alt="App Icon" width="150">
+</div>
+<mat-card mat-elevation-z8 class="login-card">
+  <h2>Iniciar sesión</h2>
+  <form>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nombre de usuario</mat-label>
+      <input matInput type="text" [(ngModel)]="userDTO.name" name="name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" [(ngModel)]="userDTO.password" name="password" required>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="full-width" (click)="login()">Entrar</button>
+    <button mat-raised-button color="primary" class="full-width" (click)="createAccount()">Crear cuenta</button>
+  </form>
+</mat-card>

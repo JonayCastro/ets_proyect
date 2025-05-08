@@ -19,6 +19,10 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FormsModule } from '@angular/forms';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     SidebarComponent
   ],
   imports: [
+    MatCardModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     MatInputModule,
@@ -45,7 +51,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
