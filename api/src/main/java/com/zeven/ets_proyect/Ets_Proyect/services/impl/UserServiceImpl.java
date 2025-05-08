@@ -1,6 +1,7 @@
 package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
+import com.zeven.ets_proyect.Ets_Proyect.dto.LoginDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteSneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.UserDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.FavoriteSneaker;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String createUser(final UserDTO userDTO) {
+    public LoginDTO createUser(final UserDTO userDTO) {
         String encryptedPassword = this.encryptPassword(userDTO.getPassword());
         userDTO.setPassword(encryptedPassword);
         String userName = userDTO.getName();
@@ -53,9 +54,15 @@ public class UserServiceImpl implements UserService {
         String urlChatBot = this.telegram.generateRegisterUrl(userContact);
         userDTO.setContact(userContact);
         userDTO.setUrlChatBot(urlChatBot);
-        this.userRepository.save(mapper.map(userDTO, User.class));
+        User userEntity = this.userRepository.save(mapper.map(userDTO, User.class));
 
-        return urlChatBot;
+        String token = this.generateToken(userEntity.getIdUser());
+
+        LoginDTO loginDTO = new LoginDTO();
+        loginDTO.setToken(token);
+        loginDTO.setUrl(urlChatBot);
+
+        return loginDTO;
     }
 
     private boolean isValid(String userName) {
@@ -70,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(final UserDTO userDTO) {
-        String bearerPrefix = "Bearer ";
+
         User userFound = this.userRepository.findByName(userDTO.getName())
                 .orElseThrow(() -> new RuntimeException(ApiMessage.USER_NOT_FOUND));
 
@@ -78,7 +85,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(ApiMessage.BAD_CREDENTIALS);
         }
 
-        return bearerPrefix + this.jwtUtil.generateToken(userFound.getIdUser());
+        return this.generateToken(userFound.getIdUser());
     }
 
     @Override
@@ -107,5 +114,11 @@ public class UserServiceImpl implements UserService {
 
         userEntity.setChatId(chatId);
         this.userRepository.save(userEntity);
+    }
+
+    @Override
+    public String generateToken(Long userId) {
+        String bearerPrefix = "Bearer ";
+        return bearerPrefix + this.jwtUtil.generateToken(userId);
     }
 }

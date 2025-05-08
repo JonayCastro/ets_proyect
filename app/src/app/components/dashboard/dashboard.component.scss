@@ -1,11 +1,11 @@
 @use '../../../styles/variables' as *;
 
-.dashboard-container {
-    height: 100vh;
-  }
-  
-  .main-content {
-    padding: 20px;
-    background-color: $background-color;
-  }
-  
+// .dashboard-container {
+//   height: 100vh;
+// }
+
+.main-content {
+  padding: 20px;
+  height: 100vh;
+  background-color: $background-color;
+}

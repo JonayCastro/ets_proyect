@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { AuthGuard } from './auth/guard/guards.guard';
+import { SubscriptionComponent } from './components/subscription/subscription.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: 'subscription', component: SubscriptionComponent},
       { path: '', redirectTo: 'users', pathMatch: 'full' },
       { path: 'users', component: UserListComponent },
       { path: 'users/:id', component: UserDetailComponent }

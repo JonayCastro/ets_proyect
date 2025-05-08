@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
+import { SubscriptionComponent } from './components/subscription/subscription.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
     UserListComponent,
     UserDetailComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    SubscriptionComponent
   ],
   imports: [
     MatCardModule,
