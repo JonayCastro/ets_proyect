@@ -50,7 +50,7 @@ public class TelegramNotificationService implements NotificationServices <Favori
         String newPrice = Integer.toString(favoriteChangedDTO.getNewPrice());
 
         return MessageFormat.format(
-                "Hola, {0}.\n ⚠\uFE0F Tu zapatilla \"{1}\"\n ha bajado de {2}€ a {3}€.\n Ver aquí: {4}{5}",
+                "Hola, {0}.\n⚠\uFE0F Tu zapatilla \"{1}\"\nha bajado de {2}€ a {3}€.\nVer aquí: {4}{5}",
                 userName, sneakerName, oldPrice, newPrice, this.baseSupplierUrl, link
         );
     }

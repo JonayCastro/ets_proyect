@@ -24,11 +24,14 @@ public class ScheduledAction {
         this.sneakersCatalogService = sneakersCatalogService;
     }
 
-    @Scheduled(fixedDelay = 30000 )
-    public void checkSneakerPrices(){
+    @Scheduled(cron="0 0 0 * * *", zone = "Atlantic/Canary")
+    public void refreshProductsFromSupplier(){
         this.sneakersCatalogService.getSupplierData();
         this.sneakersCatalogService.getProducts();
+    }
 
+    @Scheduled(fixedDelayString = "${telegram.bot.notification.period}" )
+    public void checkSneakerPrices(){
         List<FavoriteChangedDTO> favoriteChangedDTOList = this.favoriteService.getFavoriteChanged();
         if (!favoriteChangedDTOList.isEmpty()){
             this.telegramNotificationService.sendNotification(favoriteChangedDTOList);
