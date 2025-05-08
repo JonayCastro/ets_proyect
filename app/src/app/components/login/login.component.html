@@ -1,4 +1,3 @@
-
 <div class="app-icon-container">
   <img src="assets/images/app-icon.png" alt="App Icon" width="150">
 </div>
@@ -12,7 +11,10 @@
 
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Contraseña</mat-label>
-      <input matInput type="password" [(ngModel)]="userDTO.password" name="password" required>
+      <input matInput [type]="visiblePassword ? 'text' : 'password'" [(ngModel)]="userDTO.password" name="password" required>
+      <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+        <mat-icon>{{ visiblePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
     </mat-form-field>
 
     <button mat-raised-button color="primary" class="full-width" (click)="login()">Entrar</button>

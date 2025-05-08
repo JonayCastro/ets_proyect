@@ -12,6 +12,7 @@ import { DataTransferService } from '../../services/data-transfer/data-transfer.
 })
 export class LoginComponent {
 
+  visiblePassword: boolean = false;
   userDTO: UserDTO = new UserDTO({});
   private _snackBar = inject(MatSnackBar);
 
@@ -31,6 +32,11 @@ export class LoginComponent {
     })
 
   }
+
+  togglePasswordVisibility() {
+    this.visiblePassword = !this.visiblePassword;
+  }
+
 
   saveToken(token: string) {
     localStorage.setItem('token', token);
