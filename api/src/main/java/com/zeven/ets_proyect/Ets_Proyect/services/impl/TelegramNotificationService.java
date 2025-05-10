@@ -29,6 +29,11 @@ public class TelegramNotificationService implements NotificationServices <Favori
 
     @Override
     public void sendNotification(List<FavoriteChangedDTO> favoriteChangedDTO) {
+        /**
+         * This method sends notifications to users about changes in their favorite sneakers.
+         * It iterates through the list of FavoriteChangedDTO objects and builds a message for each user.
+         * The messages are then sent to the respective users using the TelegramBot service.
+         */
         Map<Long, String> messages = new HashMap<>();
 
         favoriteChangedDTO.forEach((favoriteChanged) -> {
@@ -43,6 +48,15 @@ public class TelegramNotificationService implements NotificationServices <Favori
 
     @Override
     public String buildMessage(FavoriteChangedDTO favoriteChangedDTO) {
+        /**
+         * This method builds a message for a user based on the information in the FavoriteChangedDTO object.
+         * It retrieves the user's name, sneaker name, old price, new price, and link to the sneaker.
+         * The message is formatted using MessageFormat to create a user-friendly notification.
+         *
+         * @param favoriteChangedDTO The FavoriteChangedDTO object containing the information for the message.
+         *
+         * @return A formatted message string for the user.
+         */
         String userName = favoriteChangedDTO.getUserName();
         String sneakerName = favoriteChangedDTO.getSneakerName();
         String link = favoriteChangedDTO.getLink();

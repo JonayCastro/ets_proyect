@@ -28,12 +28,28 @@ public class SneakersController implements ProductController<SneakersDataDTO, Sn
     @Override
     @GetMapping(path = ApiPaths.SUPPLIER_DATA_PATH)
     public SneakersDataDTO getSupplierData() {
+        /**
+         * This method is used to get the supplier data from the supplier catalog services.
+         * The supplier data is used to get the products from the supplier catalog services.
+         *
+         * @param supplierId the supplier id
+         *
+         * @return the supplier data
+         */
         return this.supplierCatalogServices.getSupplierData();
     }
 
     @Override
     @GetMapping
     public ResponseEntity<?> getProducts() {
+        /**
+         * This method is used to get the products from the supplier catalog services.
+         * The products are used to get the products from the supplier catalog services.
+         *
+         * @param supplierId the supplier id
+         *
+         * @return the products
+         */
         try {
             List<SneakerDTO> products = this.supplierCatalogServices.getProducts();
             return ResponseEntity.status(HttpStatus.OK).body(products);
@@ -45,18 +61,42 @@ public class SneakersController implements ProductController<SneakersDataDTO, Sn
     @Override
     @GetMapping(path = ApiPathVariables.PRODUCT_ID_PATH_VARIABLE)
     public SneakerDTO getProductById(@PathVariable Long productId) {
+        /**
+         * This method is used to get the product by id from the supplier catalog services.
+         * The product is used to get the product from the supplier catalog services.
+         *
+         * @param productId the product id
+         *
+         * @return the product
+         */
         return null;
     }
 
     @Override
     @GetMapping(path = ApiPathVariables.PRODUCT_NAME_PATH_VARIABLE)
     public SneakerDTO getProductByName(@PathVariable String productName) {
+        /**
+         * This method is used to get the product by name from the supplier catalog services.
+         * The product is used to get the product from the supplier catalog services.
+         *
+         * @param productName the product name
+         *
+         * @return the product
+         */
         return null;
     }
 
     @Override
     @GetMapping(path = ApiPathVariables.COLLECTION_ID_PATH_VARIABLE)
     public SneakerDTO getProductByBrand(@PathVariable String productBrand) {
+        /**
+         * This method is used to get the product by brand from the supplier catalog services.
+         * The product is used to get the product from the supplier catalog services.
+         *
+         * @param productBrand the product brand
+         *
+         * @return the product
+         */
         return null;
     }
 }
