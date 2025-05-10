@@ -1,0 +1,12 @@
+com.zeven.ets_proyect.Ets_Proyect
+com.zeven.ets_proyect.Ets_Proyect.config
+com.zeven.ets_proyect.Ets_Proyect.config.url_settings
+com.zeven.ets_proyect.Ets_Proyect.controllers
+com.zeven.ets_proyect.Ets_Proyect.dto
+com.zeven.ets_proyect.Ets_Proyect.dto.sneakers
+com.zeven.ets_proyect.Ets_Proyect.entities
+com.zeven.ets_proyect.Ets_Proyect.enums
+com.zeven.ets_proyect.Ets_Proyect.repositories
+com.zeven.ets_proyect.Ets_Proyect.services
+com.zeven.ets_proyect.Ets_Proyect.services.impl
+com.zeven.ets_proyect.Ets_Proyect.utils
