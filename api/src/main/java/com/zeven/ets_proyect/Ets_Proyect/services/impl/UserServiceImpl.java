@@ -44,6 +44,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public LoginDTO createUser(final UserDTO userDTO) {
+        /**
+         * This method creates a new user in the system.
+         * It first checks if the user already exists in the database.
+         * If the user does not exist, it encrypts the password and generates a contact and URL for the user.
+         * Finally, it saves the user entity to the database and generates a token for the user.
+         *
+         * @param userDTO The UserDTO object containing the user's information.
+         * * @return A LoginDTO object containing the generated token and URL for the user.
+         */
         String encryptedPassword = this.encryptPassword(userDTO.getPassword());
         userDTO.setPassword(encryptedPassword);
         String userName = userDTO.getName();
@@ -72,11 +81,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String encryptPassword(String originalPassword) {
+        /**
+         * This method encrypts the original password using the password encoder.
+         * It is used when creating a new user to ensure that the password is stored securely in the database.
+         *
+         * @param originalPassword The original password to be encrypted.
+         *
+         * @return The encrypted password as a string.
+         */
         return this.passwordEncoder.encode(originalPassword);
     }
 
     @Override
     public String login(final UserDTO userDTO) {
+        /**
+         * This method handles user login by checking the provided credentials against the database.
+         * If the credentials are valid, it generates a token for the user.
+         *
+         * @param userDTO The UserDTO object containing the user's login information.
+         *
+         * @return A string representing the generated token for the user.
+         */
 
         User userFound = this.userRepository.findByName(userDTO.getName())
                 .orElseThrow(() -> new RuntimeException(ApiMessage.USER_NOT_FOUND));
@@ -90,6 +115,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addFavoriteToUser(FavoriteSneakerDTO favoriteSneakerDTO) {
+        /**
+         * This method adds a favorite sneaker to the user's list of favorite sneakers.
+         * It retrieves the user from the database using the user ID from the security context.
+         * Then, it maps the FavoriteSneakerDTO to a FavoriteSneaker entity and saves it to the database.
+         */
         Long userId = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
 
         User user = this.userRepository.findByIdUser(userId).orElseThrow(() ->
@@ -102,6 +132,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteFavoriteById(Long favoriteSneakerId) {
+        /**
+         * This method deletes a favorite sneaker from the user's list of favorite sneakers.
+         * It retrieves the favorite sneaker from the database using the provided ID and deletes it.
+         */
         FavoriteSneaker favoriteSneaker = this.favoriteSneakersRepository.findById(favoriteSneakerId).orElseThrow(() ->
                 new RuntimeException(ApiMessage.FAVORITE_NOT_FOUND));
         this.favoriteSneakersRepository.delete(favoriteSneaker);
@@ -109,6 +143,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateChatId(String contact, Long chatId) {
+        /**
+         * This method updates the chat ID for a user in the database.
+         * It retrieves the user from the database using the provided contact information and updates the chat ID.
+         */
         User userEntity = this.userRepository.findByContact(contact).orElseThrow(() ->
                 new RuntimeException(ApiMessage.CONTACT_NOT_FOUND));
 
@@ -118,6 +156,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String generateToken(Long userId) {
+        /**
+         * This method generates a JWT token for the user using the provided user ID.
+         * The token is prefixed with "Bearer " to indicate that it is a bearer token.
+         *
+         * @param userId The ID of the user for whom the token is generated.
+         *
+         * @return A string representing the generated JWT token for the user.
+         */
         String bearerPrefix = "Bearer ";
         return bearerPrefix + this.jwtUtil.generateToken(userId);
     }
