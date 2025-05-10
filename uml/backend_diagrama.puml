@@ -1,0 +1,80 @@
+
+@startuml
+skinparam classAttributeIconSize 0
+skinparam style strictuml
+title Diagrama de clases - Backend Spring Boot
+
+package com.zeven.ets_proyect.entities {
+  class User
+  class SneakerEntity
+  class SneakerDataEntity
+  class FavoriteSneaker
+  class AvailableSizesEntity
+}
+
+package com.zeven.ets_proyect.dto {
+  class UserDTO
+  class FavoriteChangedDTO
+}
+
+package com.zeven.ets_proyect.dto.sneakers {
+  class SneakerDTO
+  class SneakersDataDTO
+  class SneakerProductsDTO
+  class FavoriteSneakerDTO
+  class AvailableSizesDTO
+}
+
+package com.zeven.ets_proyect.repositories {
+  interface UserRepository
+  interface SneakerRepository
+  interface SneakerDataRepository
+  interface FavoriteSneakersRepository
+  interface AvailableSizesRepository
+}
+
+package com.zeven.ets_proyect.services {
+  interface UserService
+  interface FavoriteService
+  interface NotificationServices
+  interface SupplierCatalogServices
+}
+
+package com.zeven.ets_proyect.services.impl {
+  class UserServiceImpl
+  class FavoriteServiceImpl
+  class SneakersCatalogService
+  class TelegramNotificationService
+}
+
+package com.zeven.ets_proyect.controllers {
+  class UserController
+  class SneakersController
+  class ProductController
+  class AccountController
+}
+
+UserService <|.. UserServiceImpl
+FavoriteService <|.. FavoriteServiceImpl
+NotificationServices <|.. TelegramNotificationService
+SupplierCatalogServices <|.. SneakersCatalogService
+
+UserController --> UserService
+SneakersController --> FavoriteService
+SneakersController --> SupplierCatalogServices
+ProductController --> SupplierCatalogServices
+AccountController --> UserService
+
+UserServiceImpl --> UserRepository
+FavoriteServiceImpl --> FavoriteSneakersRepository
+SneakersCatalogService --> SneakerRepository
+SneakersCatalogService --> SneakerDataRepository
+SneakersCatalogService --> AvailableSizesRepository
+
+UserRepository --> User
+SneakerRepository --> SneakerEntity
+SneakerDataRepository --> SneakerDataEntity
+FavoriteSneakersRepository --> FavoriteSneaker
+AvailableSizesRepository --> AvailableSizesEntity
+
+@enduml

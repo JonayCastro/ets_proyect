@@ -1,0 +1,41 @@
+
+@startuml
+skinparam style strictuml
+title Diagrama de componentes - Angular Frontend
+
+package "App Module" {
+  [AppComponent] --> [NavbarComponent]
+  [AppComponent] --> [FooterComponent]
+  [AppComponent] --> [RouterOutlet]
+}
+
+package "Auth Module" {
+  [LoginComponent]
+  [RegisterComponent]
+  [AuthService]
+  [LoginComponent] --> [AuthService]
+  [RegisterComponent] --> [AuthService]
+}
+
+package "User Module" {
+  [ProfileComponent]
+  [AccountComponent]
+  [UserService]
+  [ProfileComponent] --> [UserService]
+  [AccountComponent] --> [UserService]
+}
+
+package "Sneakers Module" {
+  [SneakerListComponent]
+  [SneakerDetailComponent]
+  [SneakerService]
+  [SneakerListComponent] --> [SneakerService]
+  [SneakerDetailComponent] --> [SneakerService]
+}
+
+[NavbarComponent] --> [LoginComponent]
+[NavbarComponent] --> [RegisterComponent]
+[NavbarComponent] --> [ProfileComponent]
+[NavbarComponent] --> [SneakerListComponent]
+
+@enduml
