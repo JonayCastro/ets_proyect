@@ -1,0 +1,11 @@
+target
+.idea
+.vscode
+.eclipse
+*.iml
+*.log
+.mvn/wrapper/maven-wrapper.jar
+**/application-*.properties
+!src/main/resources/application-docker.properties
+.env
+secrets/

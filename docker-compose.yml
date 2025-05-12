@@ -1,18 +1,43 @@
 services:
+  frontend:
+    image: node:20.13.1
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    ports:
+      - 4200:4200
+    command: sh -c "chown -R node:node /app && rm -rf /app/node_modules /app/.angular && npm install && npm run docker-start"
+    depends_on:
+      - backend
+    container_name: ETS_FRONTEND
+  backend:
+    image: eclipse-temurin:17-jdk
+    working_dir: /api
+    volumes:
+      - ./api:/api
+    ports:
+      - 8000:8000
+      - 8888:8888
+    command: sh -c "./mvnw clean install -DskipTests && ./mvnw spring-boot:run -Dspring-boot.run.profiles=docker -Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'"
+    environment:
+      - SERVER_PORT=8888
+      - MYSQL_URL=jdbc:mysql://mysqlserver/ets
+    depends_on:
+      - mysqlserver
+    container_name: ETS_BACKEND
   mysqlserver:
     image: mysql:8.0.23
     ports:
       - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=ets
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
       - MYSQL_USER=ets
       - MYSQL_PASSWORD=ets
       - MYSQL_DATABASE=ets
     volumes:
       - mysql_data:/var/lib/mysql
       - mysql_config:/etc/mysql/conf.d
-    container_name: ETS_PROJECT
+    container_name: ETS_DATABASE
 volumes:
   mysql_data:
   mysql_config:
