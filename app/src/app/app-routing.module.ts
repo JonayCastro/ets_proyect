@@ -24,6 +24,12 @@ const routes: Routes = [
   { path: '**', redirectTo: 'login' }
 ];
 
+/**
+ * Module for routing in the application.
+ * It defines the routes for the application and imports the RouterModule.
+ * The routes include the login page, dashboard, user list, and user detail pages.
+ */
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
