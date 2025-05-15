@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import LoginDTO from '../../dto/login-dto';
 import { DataTransferService } from '../../services/data-transfer/data-transfer.service';
 
+/**
+ * SubscriptionComponent is responsible for handling the subscription process.
+ * It retrieves the subscription URL from the DataTransferService and opens it in a new tab.
+ * After opening the subscription URL, it navigates to the dashboard.
+ */
 @Component({
   selector: 'app-subscription',
   templateUrl: './subscription.component.html',

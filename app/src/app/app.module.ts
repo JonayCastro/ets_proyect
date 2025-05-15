@@ -25,6 +25,17 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 
+/**
+ * AppModule is the main module of the application.
+ * It imports all the necessary modules and components.
+ * It declares the components used in the application.
+ * It provides the necessary services for HTTP requests and animations.
+ * It bootstraps the AppComponent.
+ * This module is used for client-side rendering of the application.
+ * It is the entry point for the Angular application.
+ * It is responsible for setting up the application and its dependencies.
+ */
+
 @NgModule({
   declarations: [
     AppComponent,
