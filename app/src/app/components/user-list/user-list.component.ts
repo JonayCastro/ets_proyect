@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-/**
- * UserListComponent is responsible for displaying a list of users.
- * It includes a method to navigate to the user detail page. 
- */
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
