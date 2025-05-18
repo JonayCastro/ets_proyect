@@ -6,6 +6,11 @@ import UserDTO from '../../dto/user-dto';
 import Utils from '../../utils/utils';
 import Paths from '../../config/paths';
 
+/**
+ * LoginService is a service that handles login and account creation.
+ * It provides methods to login and create an account.
+ * This service uses HttpClient to make HTTP requests to the backend.
+ */
 @Injectable({
   providedIn: 'root'
 })

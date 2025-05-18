@@ -4,13 +4,20 @@ import { LoginService } from '../../services/login-services/login.service';
 import UserDTO from '../../dto/user-dto';
 import { Router } from '@angular/router';
 import { DataTransferService } from '../../services/data-transfer/data-transfer.service';
-
+/**
+ * LoginComponent is responsible for handling user login and account creation.
+ * It uses the LoginService to communicate with the backend for authentication and account management.
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  /**
+   * visiblePassword is a boolean that determines whether the password field is visible or not.
+   * It is used to toggle the visibility of the password input field. 
+   */
 
   visiblePassword: boolean = false;
   userDTO: UserDTO = new UserDTO({});
