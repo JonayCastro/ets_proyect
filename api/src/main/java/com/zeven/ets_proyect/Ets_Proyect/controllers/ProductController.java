@@ -8,6 +8,7 @@ public interface ProductController <SupplierData, Product> {
 
     SupplierData getSupplierData();
     ResponseEntity<?> getProducts();
+    ResponseEntity<?> getStoredProducts();
     Product getProductById(Long productId);
     Product getProductByName(String productName);
     Product getProductByBrand(String productBrand);

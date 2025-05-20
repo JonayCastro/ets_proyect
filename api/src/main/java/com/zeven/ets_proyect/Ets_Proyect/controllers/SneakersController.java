@@ -59,6 +59,17 @@ public class SneakersController implements ProductController<SneakersDataDTO, Sn
     }
 
     @Override
+    @GetMapping(path = ApiPaths.STORED_PRODUCTS)
+    public ResponseEntity<?> getStoredProducts() {
+        try{
+            List<SneakerDTO> storedProducts = this.supplierCatalogServices.getStoredProducts();
+            return ResponseEntity.status(HttpStatus.OK).body(storedProducts);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiMessage.PRODUCT_LIST_CANT_GET);
+        }
+    }
+
+    @Override
     @GetMapping(path = ApiPathVariables.PRODUCT_ID_PATH_VARIABLE)
     public SneakerDTO getProductById(@PathVariable Long productId) {
         /**

@@ -8,6 +8,7 @@ public class ApiPaths {
     public static final String DELETE_FAVORITE_PATH = "/delete-favorite";
     public static final String LOGIN_PATH = "/login";
     public static final String SNEAKERS_PATH = "/sneakers";
+    public static final String STORED_PRODUCTS = "/stored-products";
     public static final String SUPPLIER_DATA_PATH = "/supplier-data";
     public static final String USERS_PATH = "/users";
 }

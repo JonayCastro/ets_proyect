@@ -14,16 +14,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserListComponent } from './components/user-list/user-list.component';
-import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FormsModule } from '@angular/forms';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
+import { SneakerDetailComponent } from './components/sneaker-detail/sneaker-detail.component';
+import { SneakersListComponent } from './components/sneakers-list/sneakers-list.component';
 
 /**
  * AppModule is the main module of the application.
@@ -41,11 +41,11 @@ import { SubscriptionComponent } from './components/subscription/subscription.co
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    UserListComponent,
-    UserDetailComponent,
     NavbarComponent,
     SidebarComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    SneakerDetailComponent,
+    SneakersListComponent
   ],
   imports: [
     MatCardModule,
@@ -65,8 +65,10 @@ import { SubscriptionComponent } from './components/subscription/subscription.co
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([AuthInterceptor])
+    )
   ],
   bootstrap: [AppComponent]
 })

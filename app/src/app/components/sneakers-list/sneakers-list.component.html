@@ -1,0 +1,11 @@
+<div class="sneaker-list-container">
+  <div class="empty-list-message" *ngIf="!sneakersDtoList?.length">
+    <h2>La lista de productos está vacía</h2>
+  </div>
+  <div class="sneaker-grid">
+    <app-sneaker-detail
+      *ngFor="let sneakerDto of sneakersDtoList"
+      [sneakerDto]="sneakerDto">
+    </app-sneaker-detail>
+  </div>
+</div>
