@@ -22,6 +22,7 @@ export class SubscriptionComponent implements OnInit{
   
   ngOnInit(): void {
     this.urlSubscription = this.dataTransferService.getData();
+    this.dataTransferService.clearData();
   }
 
   openSubcriptionTab() {

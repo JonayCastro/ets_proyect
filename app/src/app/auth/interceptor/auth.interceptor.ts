@@ -1,39 +1,39 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
+export const AuthInterceptor = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
+  const router = inject(Router);
 
-
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-
-  constructor(private router: Router) {}
-
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('token');
-
-    if (!token || this.isTokenExpired(token)) {
-      localStorage.removeItem('token');
-      this.router.navigate(['/login']);
-      return EMPTY;
-    }
-
-    const cloned = request.clone({
-      headers: request.headers.set('Authorization', `${token}`)
-    });
-    return next.handle(cloned);
+  if (req.url.includes('/account')) {
+    return next(req);
   }
 
-  private isTokenExpired(token: string): boolean {
-    try {
-      const decoded: any = jwtDecode(token);
-      const exp = decoded.exp;
-      return (Date.now() >= exp * 1000);
-    } catch (e) {
-      return true;
-    }
+  const token = localStorage.getItem('token');
+  console.log('Token:', token);
+
+  if (!token || isTokenExpired(token)) {
+    console.log('Token is expired or not present');
+    localStorage.removeItem('token');
+    router.navigate(['/login']);
+    return EMPTY;
+  }
+
+  const cloned = req.clone({
+    headers: req.headers.set('Authorization', `${token}`)
+  });
+
+  return next(cloned);
+};
+
+function isTokenExpired(token: string): boolean {
+  try {
+    const decoded: any = jwtDecode(token);
+    const exp = decoded.exp;
+    return Date.now() >= exp * 1000;
+  } catch (e) {
+    return true;
   }
 }
-
