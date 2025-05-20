@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SneakersCatalogService implements SupplierCatalogServices<SneakersDataDTO, SneakerDTO, Object> {
@@ -115,6 +116,15 @@ public class SneakersCatalogService implements SupplierCatalogServices<SneakersD
         this.persistProducts(sneakerDTOList);
 
         return sneakerDTOList;
+    }
+
+    @Override
+    public List<SneakerDTO> getStoredProducts() {
+        List<SneakerEntity> entityList = (List<SneakerEntity>) this.sneakerRepository.findAll();
+
+        return entityList.stream()
+                .map(entity -> mapper.map(entity, SneakerDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
