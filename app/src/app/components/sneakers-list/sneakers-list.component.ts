@@ -31,6 +31,7 @@ export class SneakersListComponent implements OnInit{
     });
 
   }
+  
   showSnakcBar(message: string) {
     this._snackBar.open(message, 'Close', {
       duration: 2000,

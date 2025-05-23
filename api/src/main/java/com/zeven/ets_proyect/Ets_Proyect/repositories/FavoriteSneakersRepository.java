@@ -1,6 +1,6 @@
 package com.zeven.ets_proyect.Ets_Proyect.repositories;
 
-import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteChangedDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteChangedDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.FavoriteSneaker;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

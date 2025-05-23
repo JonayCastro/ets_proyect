@@ -1,0 +1,18 @@
+<mat-card class="favorite-card" appearance="outlined">
+    <div class="image-container">
+        <img src="assets/generic-sneker-img.jpg" alt="{{ favoriteDto.name }}" />
+    </div>
+    <mat-card-content>
+        <div class="info-container">
+            <p class="favorite-brand">{{ favoriteDto.brand }}</p>
+            <div class="favorite-name-container">
+                <p class="favorite-name">{{ favoriteDto.name }}</p>
+            </div>
+            <p class="price">{{ favoriteDto.price | currency: 'EUR' }}</p>
+            <a href="{{favoriteLink}}" target="_blank">Ver</a>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="buy-button" mat-raised-button>Quitar favorito</button>
+    </mat-card-actions>
+</mat-card>

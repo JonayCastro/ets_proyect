@@ -1,6 +1,6 @@
 package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
-import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteChangedDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteChangedDTO;
 import com.zeven.ets_proyect.Ets_Proyect.services.NotificationServices;
 import com.zeven.ets_proyect.Ets_Proyect.utils.TelegramBot;
 import lombok.RequiredArgsConstructor;

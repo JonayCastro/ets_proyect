@@ -1,6 +1,6 @@
 package com.zeven.ets_proyect.Ets_Proyect.utils;
 
-import com.zeven.ets_proyect.Ets_Proyect.dto.FavoriteChangedDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteChangedDTO;
 import com.zeven.ets_proyect.Ets_Proyect.services.FavoriteService;
 import com.zeven.ets_proyect.Ets_Proyect.services.impl.SneakersCatalogService;
 import com.zeven.ets_proyect.Ets_Proyect.services.impl.TelegramNotificationService;

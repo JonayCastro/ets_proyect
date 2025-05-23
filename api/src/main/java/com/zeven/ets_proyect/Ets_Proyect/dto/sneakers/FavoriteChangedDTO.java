@@ -1,4 +1,4 @@
-package com.zeven.ets_proyect.Ets_Proyect.dto;
+package com.zeven.ets_proyect.Ets_Proyect.dto.sneakers;
 
 
 import lombok.AllArgsConstructor;
