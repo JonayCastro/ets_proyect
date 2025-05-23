@@ -24,6 +24,8 @@ import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 import { SneakerDetailComponent } from './components/sneaker-detail/sneaker-detail.component';
 import { SneakersListComponent } from './components/sneakers-list/sneakers-list.component';
+import { FavoritesListComponent } from './components/favorites-list/favorites-list.component';
+import { FavoriteDetailComponent } from './components/favorite-detail/favorite-detail.component';
 
 /**
  * AppModule is the main module of the application.
@@ -45,7 +47,9 @@ import { SneakersListComponent } from './components/sneakers-list/sneakers-list.
     SidebarComponent,
     SubscriptionComponent,
     SneakerDetailComponent,
-    SneakersListComponent
+    SneakersListComponent,
+    FavoritesListComponent,
+    FavoriteDetailComponent
   ],
   imports: [
     MatCardModule,

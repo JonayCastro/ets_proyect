@@ -5,6 +5,7 @@ public class ApiMessage {
     public static final String ACCESS_DENIED = "Access denied";
     public static final String BAD_CREDENTIALS = "Bad credentials";
     public static final String CONTACT_NOT_FOUND = "Contact not found";
+    public static final String FAVORITES_LIST_CANT_BE_GET = "Favorites list can't be get";
     public static final String FAVORITE_ADDED = "Favorite added";
     public static final String FAVORITE_CANT_BE_ADDED = "Favorite can't be added";
     public static final String FAVORITE_CANT_BE_REMOVED = "Favorite can't be removed";

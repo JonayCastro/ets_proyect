@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './auth/guard/guards.guard';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 import { SneakersListComponent } from './components/sneakers-list/sneakers-list.component';
+import { FavoritesListComponent } from './components/favorites-list/favorites-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
     children: [
       { path: 'subscription', component: SubscriptionComponent},
       { path: '', redirectTo: 'products', pathMatch: 'full' },
-      { path: 'products', component: SneakersListComponent }
+      { path: 'products', component: SneakersListComponent },
+      { path: 'favorites', component: FavoritesListComponent }
     ]
   },
   { path: '**', redirectTo: 'login' }
