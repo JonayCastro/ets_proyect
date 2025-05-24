@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface FavoriteService {
 
-    FavoriteSneaker getFavoriteById(long favoriteId);
-    void addFavoriteToUser(FavoriteSneakerDTO favoriteSneakerDTO);
+    FavoriteSneaker getFavoriteById(Long favoriteId);
+    void addFavoriteBySneakerId(Long sneakerStoredId);
     void deleteFavoriteById(Long favoriteSneakerId);
     List<FavoriteChangedDTO> getFavoriteChanged();
     List<FavoriteSneakerDTO> getFavoritesList();

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import FavoriteDTO from '../../dto/favorite-dto';
 import { Observable } from 'rxjs';
@@ -18,5 +18,14 @@ export class FavoritesService {
     });
 
     return this.http.get<FavoriteDTO[]>(url);
+  }
+
+  public addFavorite(sneakerId: number): Observable<{ message: string }> {
+    const url: string = Utils.urlConstructorWithId({
+      paths: [Paths.FAVORITE_PATH, Paths.ADD_PATH],
+      id: sneakerId
+    });
+
+    return this.http.put<{ message: string }>(url, null);
   }
 }

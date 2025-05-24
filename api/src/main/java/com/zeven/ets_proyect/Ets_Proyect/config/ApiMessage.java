@@ -12,6 +12,7 @@ public class ApiMessage {
     public static final String FAVORITE_NOT_FOUND = "Favorite not found";
     public static final String FAVORITE_REMOVED = "Favorite removed";
     public static final String PRODUCT_LIST_CANT_GET = "Product list can't get";
+    public static final String SNEAKER_NOT_FOUND = "Sneaker not found";
     public static final String SUPPLIER_NOT_FOUND = "Supplier not found";
     public static final String USER_CREATED = "User created";
     public static final String USER_NAME_NOT_PERMITTED = "User name has not permitted format";

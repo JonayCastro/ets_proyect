@@ -12,10 +12,8 @@ export const AuthInterceptor = (req: HttpRequest<any>, next: HttpHandlerFn): Obs
   }
 
   const token = localStorage.getItem('token');
-  console.log('Token:', token);
 
   if (!token || isTokenExpired(token)) {
-    console.log('Token is expired or not present');
     localStorage.removeItem('token');
     router.navigate(['/login']);
     return EMPTY;
