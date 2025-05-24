@@ -13,6 +13,6 @@
         </div>
     </mat-card-content>
     <mat-card-actions>
-        <button class="buy-button" mat-raised-button>Añadir favoritos</button>
+        <button class="buy-button" mat-raised-button (click)="addFavorite(sneakerDto.sneakerId)">Añadir favoritos</button>
     </mat-card-actions>
 </mat-card>

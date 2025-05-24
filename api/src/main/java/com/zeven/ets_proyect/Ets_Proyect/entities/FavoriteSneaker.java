@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -33,20 +34,18 @@ public class FavoriteSneaker {
     @Column(name ="origin_collection_id", nullable = false)
     private Long originCollectionId;
 
-    private String name;
-
-    private String brand;
-
-    private String size;
-
-    private Integer price;
-
-    @Column(name = "image_path")
-    private String imagePath;
-
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    private String name;
+    private String brand;
+    private String imageAlt;
+    private String link;
+    private Integer price;
+    private String image;
+
+
 
 
 }

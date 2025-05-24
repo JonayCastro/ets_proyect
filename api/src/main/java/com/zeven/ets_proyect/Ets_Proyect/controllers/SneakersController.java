@@ -5,6 +5,7 @@ import com.zeven.ets_proyect.Ets_Proyect.config.ApiPathVariables;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPaths;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakersDataDTO;
+import com.zeven.ets_proyect.Ets_Proyect.entities.SneakerEntity;
 import com.zeven.ets_proyect.Ets_Proyect.services.SupplierCatalogServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,9 @@ import java.util.List;
 @RequestMapping(path = ApiPaths.SNEAKERS_PATH)
 public class SneakersController implements ProductController<SneakersDataDTO, SneakerDTO>{
 
-    private final SupplierCatalogServices<SneakersDataDTO, SneakerDTO, Object> supplierCatalogServices;
+    private final SupplierCatalogServices<SneakersDataDTO, SneakerDTO, SneakerEntity> supplierCatalogServices;
 
-    SneakersController (SupplierCatalogServices<SneakersDataDTO, SneakerDTO, Object> supplierCatalogServices) {
+    SneakersController (SupplierCatalogServices<SneakersDataDTO, SneakerDTO, SneakerEntity> supplierCatalogServices) {
         this.supplierCatalogServices = supplierCatalogServices;
     }
 

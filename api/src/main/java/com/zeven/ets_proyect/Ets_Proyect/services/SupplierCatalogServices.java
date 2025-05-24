@@ -2,13 +2,13 @@ package com.zeven.ets_proyect.Ets_Proyect.services;
 
 import java.util.List;
 
-public interface SupplierCatalogServices <DataSupplier, Product, FilterCriteria> {
+public interface SupplierCatalogServices <DataSupplier, ProductDTO, EntityProduct> {
 
+    EntityProduct findEntityById(Long productId);
     DataSupplier getSupplierData();
     void persistDataSupplier(DataSupplier dataSupplier);
-    List<Product> getProducts();
-    List<Product> getStoredProducts();
-    void persistProducts (List<Product> productList);
-    Product getProduct(FilterCriteria productIdentifier);
+    List<ProductDTO> getProducts();
+    List<ProductDTO> getStoredProducts();
+    void persistProducts (List<ProductDTO> productDTOList);
     String buildUrl(String page);
 }
