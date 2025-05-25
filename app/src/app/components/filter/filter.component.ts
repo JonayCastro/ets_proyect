@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
 import Filters from '../../config/filters/filter';
 import SneakerDTO from '../../dto/sneaker-dto';
 import FavoriteDTO from '../../dto/favorite-dto';
@@ -12,35 +11,36 @@ import FiltersDTO from '../../dto/filters-dto';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent{
   
-  filters = new FormControl('');
-  filterDto: FiltersDTO = new FiltersDTO();
+  filterDto: FiltersDTO = Filters.getFiltersApplied();
+
+  filterApplied: FiltersDTO = this.filterDto;
+
   sneakerFiltersList: any[] = Filters.getFiltersList();
-  selectedFilterKey: string = '';
+  
   minRangePrice: number = 0;
   maxRangePrice: number = 500;
-  sneakerFilteredList: SneakerDTO[] = [];
-  favoritesFilteredList: FavoriteDTO[] = [];
+  
   productsUrl: string = 'products';
   favoritesUrl: string = 'favorites';
 
+  sneakerFilteredList: SneakerDTO[] = [];
+  favoritesFilteredList: FavoriteDTO[] = [];
+
   constructor(private router: Router) {}
   
-  ngOnInit(): void {
-    this.filters.setValue(Filters.getFiltersList()[0]);
-    this.selectedFilterKey = Filters.getFiltersList()[0].key;
-    console.log('oninit', this.selectedFilterKey);
+  saveFilters(): void {
+    Filters.addFilter(this.filterDto);
   }
 
-  addFilter(filter: string): void {
-    Filters.addFilter(filter);
-    this.selectedFilterKey = filter;
-    console.log('add', this.selectedFilterKey);
+  addFilter(filter: FiltersDTO): void {
+    Filters.addFilter(this.filterDto);
   }
 
   clearFilters(): void {
     Filters.clearFilters();
+    this.filterDto.key = '';
     this.filterDto.brandFilter = '';
     this.filterDto.minPriceFilter = null;
     this.filterDto.maxPriceFilter = null;
@@ -48,8 +48,6 @@ export class FilterComponent implements OnInit {
 
   getFilteredList(): void {
     const componentUrl: string = this.router.url.split('/').pop() || '';
-
-    console.log('filter dto', this.filterDto);
 
     if (componentUrl === this.productsUrl) {
       console.log('products');

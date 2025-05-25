@@ -1,26 +1,29 @@
 <div class="filter-container">
   <h1>Filtrar listado</h1>
   <div class="ctrl-filter">
-    <div [hidden]="selectedFilterKey !== 'price'">
+    <div [hidden]="filterDto.key !== 'price'">
       <mat-form-field>
         <mat-label>Precio mínimo</mat-label>
-        <input type="number" [min]="minRangePrice" matInput placeholder="Precio minimo" [(ngModel)]="filterDto.minPriceFilter">
+        <input type="number" [min]="minRangePrice" matInput placeholder="Precio mínimo"
+          [(ngModel)]="filterDto.minPriceFilter" (ngModelChange)="saveFilters()" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Precio máximo</mat-label>
-        <input type="number" [max]="maxRangePrice" matInput placeholder="Precio máximo" [(ngModel)]="filterDto.maxPriceFilter">
+        <input type="number" [max]="maxRangePrice" matInput placeholder="Precio máximo"
+          [(ngModel)]="filterDto.maxPriceFilter" (ngModelChange)="saveFilters()" />
       </mat-form-field>
     </div>
-    <div [hidden]="selectedFilterKey === 'price'">
+    <div [hidden]="filterDto.key === 'price'">
       <mat-form-field>
-        <input type="text" matInput placeholder="Buscar por" [(ngModel)]="filterDto.brandFilter">
+        <input type="text" matInput placeholder="Buscar por" [(ngModel)]="filterDto.brandFilter"
+          (ngModelChange)="saveFilters()" />
       </mat-form-field>
     </div>
     <mat-form-field>
-      <mat-select [formControl]="filters" (selectionChange)="addFilter($event.value.key)">
+      <mat-select [(ngModel)]="filterDto.key" (selectionChange)="saveFilters()">
         @for (sneakerFilter of sneakerFiltersList; track sneakerFilter) {
-        <mat-option [value]="sneakerFilter">
-          {{sneakerFilter.title}}
+        <mat-option [value]="sneakerFilter.key">
+          {{ sneakerFilter.title }}
         </mat-option>
         }
       </mat-select>
