@@ -28,4 +28,13 @@ export class FavoritesService {
 
     return this.http.put<{ message: string }>(url, null);
   }
+
+  public removeFavorite(favoriteId: number): Observable<{message: string}> {
+    const url: string = Utils.urlConstructorWithId({
+      paths: [Paths.FAVORITE_PATH, Paths.REMOVE_PATH],
+      id: favoriteId
+    });
+
+    return this.http.delete<{ message: string }>(url);
+  }
 }

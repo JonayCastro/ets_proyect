@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import FavoriteDTO from '../../dto/favorite-dto';
 import { FavoritesService } from '../../services/favorite/favorites.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FavoritesEmitterService } from '../../emitters/favorite-emiter/favorites-emiter.service';
+import FavoritesEvent from '../../enums/favorites-event';
 
 @Component({
   selector: 'app-favorites',
@@ -13,9 +15,16 @@ export class FavoritesListComponent implements OnInit{
   favoriteDtoList: FavoriteDTO[] = []
   private _snackBar = inject(MatSnackBar);
   
-  constructor(private favoritesService: FavoritesService) {}
+  constructor(private favoritesService: FavoritesService, private favoriteEmitterService: FavoritesEmitterService) {}
   
   ngOnInit(): void {
+    this.favoriteEmitterService.favoriteRemoved$.subscribe({
+      next: (event: FavoritesEvent) => { 
+        if (event === FavoritesEvent.REMOVE) {
+          this.getFavorites();
+        }
+      }
+    });
     this.getFavorites();
   }
 

@@ -42,13 +42,13 @@ public class FavoritesController {
         }
     }
 
-    @DeleteMapping(path = ApiPaths.DELETE_PATH + ApiPathVariables.FAVORITE_ID_PATH_VARIABLE)
-    public ResponseEntity<?> deleteFavorite(@PathVariable Long favoriteSneakerId ){
+    @DeleteMapping(path = ApiPaths.REMOVE_PATH + ApiPathVariables.FAVORITE_ID_PATH_VARIABLE)
+    public ResponseEntity<?> deleteFavorite(@PathVariable Long favoriteId ){
         try {
-            this.favoriteService.deleteFavoriteById(favoriteSneakerId);
-            return ResponseEntity.status(HttpStatus.OK).body(ApiMessage.FAVORITE_REMOVED);
+            this.favoriteService.deleteFavoriteById(favoriteId);
+            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", ApiMessage.FAVORITE_REMOVED));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiMessage.FAVORITE_CANT_BE_REMOVED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", ApiMessage.FAVORITE_CANT_BE_REMOVED));
         }
     }
 

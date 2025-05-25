@@ -3,6 +3,7 @@ import SneakerDTO from '../../dto/sneaker-dto';
 import { FavoritesService } from '../../services/favorite/favorites.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FavoritesEmitterService } from '../../emitters/favorite-emiter/favorites-emiter.service';
+import AppConstants from '../../config/app-constants';
 
 @Component({
   selector: 'app-sneaker-detail',
@@ -13,7 +14,7 @@ export class SneakerDetailComponent implements OnInit {
 
   @Input() sneakerDto!: SneakerDTO;
   sneakerLink: string = '';
-  baseUrl: string = 'https://www.fittestfreakest.es/';
+  baseUrl: string = AppConstants.SNEAKER_BASE_URL;
   private _snackBar = inject(MatSnackBar);
   
 
