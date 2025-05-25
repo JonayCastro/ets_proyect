@@ -6,10 +6,14 @@ mat-nav-list {
     a {
       color: $text-color;
       font-weight: 500;
-  
+      
       &:hover {
         background-color: lighten($primary-color, 40%);
       }
     }
+    .active-link {
+        font-weight: bold;
+        color: #1976d2;
+      }
   }
   

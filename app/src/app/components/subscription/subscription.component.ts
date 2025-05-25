@@ -11,7 +11,7 @@ import { DataTransferService } from '../../services/data-transfer/data-transfer.
 @Component({
   selector: 'app-subscription',
   templateUrl: './subscription.component.html',
-  styleUrl: './subscription.component.scss'
+  styleUrls: ['./subscription.component.scss']
 })
 export class SubscriptionComponent implements OnInit{
 
