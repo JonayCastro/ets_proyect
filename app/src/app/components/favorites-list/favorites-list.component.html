@@ -1,0 +1,11 @@
+<div class="favorite-list-container">
+  <div class="empty-list-message" *ngIf="!favoriteDtoList?.length">
+    <h2>La lista de productos está vacía</h2>
+  </div>
+  <div class="favorite-grid">
+    <app-favorite-detail
+      *ngFor="let favoriteDto of favoriteDtoList"
+      [favoriteDto]="favoriteDto">
+    </app-favorite-detail>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import com.zeven.ets_proyect.Ets_Proyect.config.ApiPathVariables;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPaths;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakersDataDTO;
+import com.zeven.ets_proyect.Ets_Proyect.entities.SneakerEntity;
 import com.zeven.ets_proyect.Ets_Proyect.services.SupplierCatalogServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,9 @@ import java.util.List;
 @RequestMapping(path = ApiPaths.SNEAKERS_PATH)
 public class SneakersController implements ProductController<SneakersDataDTO, SneakerDTO>{
 
-    private final SupplierCatalogServices<SneakersDataDTO, SneakerDTO, Object> supplierCatalogServices;
+    private final SupplierCatalogServices<SneakersDataDTO, SneakerDTO, SneakerEntity> supplierCatalogServices;
 
-    SneakersController (SupplierCatalogServices<SneakersDataDTO, SneakerDTO, Object> supplierCatalogServices) {
+    SneakersController (SupplierCatalogServices<SneakersDataDTO, SneakerDTO, SneakerEntity> supplierCatalogServices) {
         this.supplierCatalogServices = supplierCatalogServices;
     }
 
@@ -53,6 +54,17 @@ public class SneakersController implements ProductController<SneakersDataDTO, Sn
         try {
             List<SneakerDTO> products = this.supplierCatalogServices.getProducts();
             return ResponseEntity.status(HttpStatus.OK).body(products);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiMessage.PRODUCT_LIST_CANT_GET);
+        }
+    }
+
+    @Override
+    @GetMapping(path = ApiPaths.STORED_PRODUCTS)
+    public ResponseEntity<?> getStoredProducts() {
+        try{
+            List<SneakerDTO> storedProducts = this.supplierCatalogServices.getStoredProducts();
+            return ResponseEntity.status(HttpStatus.OK).body(storedProducts);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiMessage.PRODUCT_LIST_CANT_GET);
         }

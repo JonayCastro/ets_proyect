@@ -1,0 +1,94 @@
+@use '../../../styles/variables' as *;
+
+.favorite-card {
+  display: flex;
+  background-color: $card-color;
+  color: $text-color;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: $primary-color;
+    color: $accent-color;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    img {
+      max-width: 100%;
+      border-radius: 12px;
+    }
+  }
+
+  .buy-button {
+    background-color: $primary-color;
+    color: $accent-color;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .info-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+
+    .favorite-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      color: $text-color;
+      margin-bottom: 2rem;
+    }
+
+    .favorite-name-container {
+      min-height: 12vh;
+    }
+
+    .favorite-name {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}

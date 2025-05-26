@@ -24,9 +24,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class SneakersCatalogService implements SupplierCatalogServices<SneakersDataDTO, SneakerDTO, Object> {
+public class SneakersCatalogService implements SupplierCatalogServices<SneakersDataDTO, SneakerDTO, SneakerEntity> {
 
     @Value("${supplier.sneakers.base.url}")
     private String baseUrl;
@@ -42,6 +43,21 @@ public class SneakersCatalogService implements SupplierCatalogServices<SneakersD
         this.sneakerDataRepository = sneakerDataRepository;
         this.sneakerRepository = sneakerRepository;
         this.mapper = mapper;
+    }
+
+    @Override
+    public SneakerEntity findEntityById(Long sneakerId) {
+        /**
+         * This method retrieves a sneaker id.
+         * It checks if the product exists in the database using the provided identifier.
+         * If it exists, it returns the corresponding SneakerEntity object; otherwise, it throws a RuntimeException.
+         *
+         * @param sneakerId The identifier of the sneaker product to retrieve.
+         *
+         * @return SneakerEntity object representing the retrieved product.
+         */
+        return this.sneakerRepository.findById(sneakerId).orElseThrow(() ->
+            new RuntimeException(ApiMessage.SNEAKER_NOT_FOUND));
     }
 
     @Override
@@ -118,6 +134,15 @@ public class SneakersCatalogService implements SupplierCatalogServices<SneakersD
     }
 
     @Override
+    public List<SneakerDTO> getStoredProducts() {
+        List<SneakerEntity> entityList = (List<SneakerEntity>) this.sneakerRepository.findSneakersNotInFavorites();
+
+        return entityList.stream()
+                .map(entity -> mapper.map(entity, SneakerDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void persistProducts(List<SneakerDTO> sneakerDTOList) {
         /**
          * This method persists sneaker products into the database.
@@ -146,21 +171,6 @@ public class SneakersCatalogService implements SupplierCatalogServices<SneakersD
                 .orElseThrow(() -> new RuntimeException(ApiMessage.SUPPLIER_NOT_FOUND));
         return sneakerDataEntity.getTotalPages();
     }
-
-    @Override
-    public SneakerDTO getProduct(Object productIdentifier) {
-        /**
-         * This method retrieves a sneaker product by its identifier from the database.
-         * It checks if the product exists in the database using the provided identifier.
-         * If it exists, it returns the corresponding SneakerDTO object; otherwise, it throws a RuntimeException.
-         *
-         * @param productIdentifier The identifier of the sneaker product to retrieve.
-         *
-         * @return SneakerDTO object representing the retrieved product.
-         */
-        return null;
-    }
-
 
     @Override
     public String buildUrl(String page) {

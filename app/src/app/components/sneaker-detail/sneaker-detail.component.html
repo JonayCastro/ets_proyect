@@ -1,0 +1,18 @@
+<mat-card class="sneaker-card" appearance="outlined">
+    <div class="image-container">
+        <img src="assets/generic-sneker-img.jpg" alt="{{ sneakerDto.name }}" />
+    </div>
+    <mat-card-content>
+        <div class="info-container">
+            <p class="snaker-brand">{{ sneakerDto.brand }}</p>
+            <div class="snaker-name-container">
+                <p class="sneaker-name">{{ sneakerDto.name }}</p>
+            </div>
+            <p class="price">{{ sneakerDto.price | currency: 'EUR' }}</p>
+            <a href="{{sneakerLink}}" target="_blank">Ver</a>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="buy-button" mat-raised-button (click)="addFavorite(sneakerDto.sneakerId)">Añadir favoritos</button>
+    </mat-card-actions>
+</mat-card>
