@@ -60,7 +60,6 @@ public class FavoriteServiceImpl implements FavoriteService {
          * Then, it maps the FavoriteSneakerDTO to a FavoriteSneaker entity and saves it to the database.
          */
         try {
-            Long userId = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
             User user = this.userService.findUserById(userId);
             SneakerEntity sneakerEntity = this.supplierCatalogServices.findEntityById(sneakerStoredId);
             FavoriteSneaker favoriteSneaker = this.mapper.map(sneakerEntity, FavoriteSneaker.class);
