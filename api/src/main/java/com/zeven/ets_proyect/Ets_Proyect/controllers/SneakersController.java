@@ -3,16 +3,15 @@ package com.zeven.ets_proyect.Ets_Proyect.controllers;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPathVariables;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPaths;
+import com.zeven.ets_proyect.Ets_Proyect.dto.FilterDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteSneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakersDataDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.SneakerEntity;
 import com.zeven.ets_proyect.Ets_Proyect.services.SupplierCatalogServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -65,6 +64,26 @@ public class SneakersController implements ProductController<SneakersDataDTO, Sn
         try{
             List<SneakerDTO> storedProducts = this.supplierCatalogServices.getStoredProducts();
             return ResponseEntity.status(HttpStatus.OK).body(storedProducts);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiMessage.PRODUCT_LIST_CANT_GET);
+        }
+    }
+
+    @PostMapping(path = ApiPaths.FILTERED_PATH + ApiPaths.BRAND_PATH)
+    public ResponseEntity<?> getStoredProductsByName(@RequestBody FilterDTO filterDTO) {
+        try {
+            List<SneakerDTO> sneakerDTOS = this.supplierCatalogServices.getSneakerListByBrand(filterDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(sneakerDTOS);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiMessage.PRODUCT_LIST_CANT_GET);
+        }
+    }
+
+    @PostMapping(path = ApiPaths.FILTERED_PATH + ApiPaths.PRICE_PATH)
+    public ResponseEntity<?> getStoredProductsByPrice(@RequestBody FilterDTO filterDTO) {
+        try {
+            List<SneakerDTO> sneakerDTOS = this.supplierCatalogServices.getSneakerListByPrice(filterDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(sneakerDTOS);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiMessage.PRODUCT_LIST_CANT_GET);
         }

@@ -1,0 +1,36 @@
+<div class="filter-container">
+  <h1>Filtrar listado</h1>
+  <div class="ctrl-filter">
+    <div [hidden]="filterDto.key !== 'price'">
+      <mat-form-field>
+        <mat-label>Precio mínimo</mat-label>
+        <input type="number" [disabled]="isInputDisabled()" [min]="minRangePrice" matInput placeholder="Precio mínimo"
+          [(ngModel)]="filterDto.minPriceFilter" (ngModelChange)="saveFilters()" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Precio máximo</mat-label>
+        <input type="number" [disabled]="isInputDisabled()" [max]="maxRangePrice" matInput placeholder="Precio máximo"
+          [(ngModel)]="filterDto.maxPriceFilter" (ngModelChange)="saveFilters()" />
+      </mat-form-field>
+    </div>
+    <div [hidden]="filterDto.key === 'price'">
+      <mat-form-field>
+        <input type="text" [disabled]="isInputDisabled()" matInput placeholder="Buscar por" [(ngModel)]="filterDto.brandFilter"
+          (ngModelChange)="saveFilters()" />
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <mat-select [(ngModel)]="filterDto.key" (selectionChange)="saveFilters()">
+        @for (sneakerFilter of sneakerFiltersList; track sneakerFilter) {
+        <mat-option [value]="sneakerFilter.key">
+          {{ sneakerFilter.title }}
+        </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <div class="btn-container">
+      <button [disabled]="!hasAnyFilter()" mat-raised-button color="primary" (click)="filterList()">Filtar</button>
+      <button mat-raised-button color="primary" (click)="clearFilters()">Limpiar Filtros</button>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,6 @@
 <mat-nav-list>
-    <a mat-list-item routerLink="/dashboard/products">Productos</a>
-    <a mat-list-item routerLink="/dashboard/favorites">Favoritos</a>
+    <a mat-list-item routerLink="/dashboard/products" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">Productos</a>
+    <a mat-list-item routerLink="/dashboard/favorites" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">Favoritos</a>
 </mat-nav-list>

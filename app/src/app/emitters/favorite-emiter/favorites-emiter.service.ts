@@ -7,19 +7,17 @@ import FavoritesEvent from '../../enums/favorites-event';
 })
 export class FavoritesEmitterService {
 
-  private favoriteAddedSubject = new Subject<FavoritesEvent>();
-  private favoriteRemovedSubject = new Subject<FavoritesEvent>();
+  private favoriteEventSubject = new Subject<FavoritesEvent>();
 
-  favoriteAdded$: Observable<FavoritesEvent> = this.favoriteAddedSubject.asObservable();
-  favoriteRemoved$: Observable<FavoritesEvent> = this.favoriteRemovedSubject.asObservable();
+  favoriteEvents$: Observable<FavoritesEvent> = this.favoriteEventSubject.asObservable();
 
   constructor() {}
 
   favoriteAdded(): void {
-    this.favoriteAddedSubject.next(FavoritesEvent.ADD);
+    this.favoriteEventSubject.next(FavoritesEvent.ADD);
   }
 
   favoriteRemoved(): void {
-    this.favoriteRemovedSubject.next(FavoritesEvent.REMOVE);
+    this.favoriteEventSubject.next(FavoritesEvent.REMOVE);
   }
 }
