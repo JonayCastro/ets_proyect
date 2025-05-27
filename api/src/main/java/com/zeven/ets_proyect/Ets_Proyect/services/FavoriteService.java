@@ -1,6 +1,7 @@
 package com.zeven.ets_proyect.Ets_Proyect.services;
 
 
+import com.zeven.ets_proyect.Ets_Proyect.dto.FilterDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteChangedDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteSneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.FavoriteSneaker;
@@ -14,4 +15,6 @@ public interface FavoriteService {
     void deleteFavoriteById(Long favoriteSneakerId);
     List<FavoriteChangedDTO> getFavoriteChanged();
     List<FavoriteSneakerDTO> getFavoritesList();
+    List<FavoriteSneakerDTO> getFavoritesListByBrand(FilterDTO filterDto);
+    List<FavoriteSneakerDTO> getFavoritesListByPrice(FilterDTO filterDto);
 }

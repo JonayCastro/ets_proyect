@@ -10,6 +10,18 @@ export default class Filters {
     return FiltersType.filters;
   }
 
+  static hasFiltersApplied(): boolean {
+    return !!(
+      Filters._appliedFilters &&
+      (
+        Filters._appliedFilters.key ||
+        Filters._appliedFilters.brandFilter ||
+        Filters._appliedFilters.minPriceFilter != null ||
+        Filters._appliedFilters.maxPriceFilter != null
+      )
+    );
+  }
+
   static addFilter(filterDto: FiltersDTO): void {
     this._appliedFilters = filterDto;
     if (typeof window !== 'undefined') {

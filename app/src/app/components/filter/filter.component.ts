@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import Filters from '../../config/filters/filter';
-import SneakerDTO from '../../dto/sneaker-dto';
-import FavoriteDTO from '../../dto/favorite-dto';
-import { Router } from '@angular/router';
 import FiltersDTO from '../../dto/filters-dto';
+import { FiltersEmitterService } from '../../emitters/filter-emitter/filters-emitter.service';
 
 
 @Component({
@@ -12,7 +10,7 @@ import FiltersDTO from '../../dto/filters-dto';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent{
-  
+
   filterDto: FiltersDTO = Filters.getFiltersApplied();
 
   filterApplied: FiltersDTO = this.filterDto;
@@ -21,14 +19,8 @@ export class FilterComponent{
   
   minRangePrice: number = 0;
   maxRangePrice: number = 500;
-  
-  productsUrl: string = 'products';
-  favoritesUrl: string = 'favorites';
 
-  sneakerFilteredList: SneakerDTO[] = [];
-  favoritesFilteredList: FavoriteDTO[] = [];
-
-  constructor(private router: Router) {}
+  constructor(private filtersEmitterService: FiltersEmitterService) {}
   
   saveFilters(): void {
     Filters.addFilter(this.filterDto);
@@ -38,25 +30,24 @@ export class FilterComponent{
     Filters.addFilter(this.filterDto);
   }
 
+  hasAnyFilter(): boolean {
+    return Filters.hasFiltersApplied() ;
+  }
+
   clearFilters(): void {
     Filters.clearFilters();
     this.filterDto.key = '';
     this.filterDto.brandFilter = '';
     this.filterDto.minPriceFilter = null;
     this.filterDto.maxPriceFilter = null;
+    this.filtersEmitterService.filtersRemoved();
   }
 
-  getFilteredList(): void {
-    const componentUrl: string = this.router.url.split('/').pop() || '';
-
-    if (componentUrl === this.productsUrl) {
-      console.log('products');
-    } else {
-      console.log('favorites');
-    }
-    
+  isInputDisabled(): boolean {
+    return !this.filterDto.key;
   }
 
-
-
+  filterList(): void {
+    this.filtersEmitterService.filtersAdded();
+  }
 }

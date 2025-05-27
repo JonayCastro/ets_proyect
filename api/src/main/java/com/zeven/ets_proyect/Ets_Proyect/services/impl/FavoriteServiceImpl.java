@@ -1,6 +1,7 @@
 package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
+import com.zeven.ets_proyect.Ets_Proyect.dto.FilterDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteChangedDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteSneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakerDTO;
@@ -96,6 +97,27 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     public List<FavoriteSneakerDTO> getFavoritesList() {
         List<FavoriteSneaker> favoriteSneakers = (List<FavoriteSneaker>) this.favoriteSneakersRepository.findAll();
+
+        return favoriteSneakers.stream()
+                .map(favoriteEntity -> this.mapper.map(favoriteEntity, FavoriteSneakerDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FavoriteSneakerDTO> getFavoritesListByBrand(FilterDTO filterDto) {
+        String favoriteBrand = filterDto.getBrandFilter();
+        List<FavoriteSneaker> favoriteSneakers = (List<FavoriteSneaker>) this.favoriteSneakersRepository.findByBrandContainingIgnoreCase(favoriteBrand);
+
+        return favoriteSneakers.stream()
+                .map(favoriteEntity -> this.mapper.map(favoriteEntity, FavoriteSneakerDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FavoriteSneakerDTO> getFavoritesListByPrice(FilterDTO filterDto) {
+        Integer minPrice = filterDto.getMinPriceFilter();
+        Integer maxPrice = filterDto.getMaxPriceFilter();
+        List<FavoriteSneaker> favoriteSneakers = (List<FavoriteSneaker>) this.favoriteSneakersRepository.findByPriceBetween(minPrice, maxPrice);
 
         return favoriteSneakers.stream()
                 .map(favoriteEntity -> this.mapper.map(favoriteEntity, FavoriteSneakerDTO.class))

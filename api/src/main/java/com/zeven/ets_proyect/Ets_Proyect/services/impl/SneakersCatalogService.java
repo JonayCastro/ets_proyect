@@ -3,6 +3,7 @@ package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
 import com.zeven.ets_proyect.Ets_Proyect.config.url_settings.UrlLanguageParams;
 import com.zeven.ets_proyect.Ets_Proyect.config.url_settings.UrlParams;
+import com.zeven.ets_proyect.Ets_Proyect.dto.FilterDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakerProductsDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakersDataDTO;
@@ -186,5 +187,26 @@ public class SneakersCatalogService implements SupplierCatalogServices<SneakersD
                 .addQueryParam(UrlParams.LANG, UrlLanguageParams.SPAIN_LANGUAGE)
                 .addQueryParam(UrlParams.PAGE, page)
                 .build();
+    }
+
+    @Override
+    public List<SneakerDTO> getSneakerListByBrand(FilterDTO filterDto) {
+        String brandName = filterDto.getBrandFilter();
+        List<SneakerEntity> entityList = (List<SneakerEntity>) this.sneakerRepository.findSneakersByBrandExcludingFavorites(brandName);
+
+        return entityList.stream()
+                .map(entity -> mapper.map(entity, SneakerDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SneakerDTO> getSneakerListByPrice(FilterDTO filterDto) {
+        Integer minPrice = filterDto.getMinPriceFilter();
+        Integer maxPrice = filterDto.getMaxPriceFilter();
+        List<SneakerEntity> entityList = (List<SneakerEntity>) this.sneakerRepository.findSneakersByPriceRangeExcludingFavorites(minPrice, maxPrice);
+
+        return entityList.stream()
+                .map(entity -> mapper.map(entity, SneakerDTO.class))
+                .collect(Collectors.toList());
     }
 }

@@ -3,6 +3,7 @@ package com.zeven.ets_proyect.Ets_Proyect.controllers;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPathVariables;
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiPaths;
+import com.zeven.ets_proyect.Ets_Proyect.dto.FilterDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteSneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.services.FavoriteService;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,26 @@ public class FavoritesController {
             List<FavoriteSneakerDTO> favoriteSneakerDTO = this.favoriteService.getFavoritesList();
             return ResponseEntity.status(HttpStatus.OK).body(favoriteSneakerDTO);
         } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiMessage.FAVORITES_LIST_CANT_BE_GET);
+        }
+    }
+
+    @PostMapping(path = ApiPaths.FILTERED_PATH + ApiPaths.BRAND_PATH)
+    public ResponseEntity<?> listFavoriteByName(@RequestBody FilterDTO filterDTO) {
+        try {
+            List<FavoriteSneakerDTO> favoriteSneakerDTOS = this.favoriteService.getFavoritesListByBrand(filterDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(favoriteSneakerDTOS);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiMessage.FAVORITES_LIST_CANT_BE_GET);
+        }
+    }
+
+    @PostMapping(path = ApiPaths.FILTERED_PATH + ApiPaths.PRICE_PATH)
+    public ResponseEntity<?> listFavoriteByPrice(@RequestBody FilterDTO filterDTO) {
+        try {
+            List<FavoriteSneakerDTO> favoriteSneakerDTOS = this.favoriteService.getFavoritesListByPrice(filterDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(favoriteSneakerDTOS);
+        } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiMessage.FAVORITES_LIST_CANT_BE_GET);
         }
     }

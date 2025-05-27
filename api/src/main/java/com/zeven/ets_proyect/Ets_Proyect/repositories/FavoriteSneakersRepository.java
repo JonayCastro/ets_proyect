@@ -25,4 +25,8 @@ public interface FavoriteSneakersRepository extends CrudRepository<FavoriteSneak
         LIMIT 1
         """, nativeQuery = true)
     List<FavoriteChangedDTO> findTopFavoriteChanged();
+
+    List<FavoriteSneaker> findByBrandContainingIgnoreCase(String brand);
+    List<FavoriteSneaker> findByPriceBetween(Integer minPrice, Integer maxPrice);
+
 }
