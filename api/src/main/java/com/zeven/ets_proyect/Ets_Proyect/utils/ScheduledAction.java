@@ -1,6 +1,6 @@
 package com.zeven.ets_proyect.Ets_Proyect.utils;
 
-import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteChangedDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.OffersDTO;
 import com.zeven.ets_proyect.Ets_Proyect.services.FavoriteService;
 import com.zeven.ets_proyect.Ets_Proyect.services.impl.SneakersCatalogService;
 import com.zeven.ets_proyect.Ets_Proyect.services.impl.TelegramNotificationService;
@@ -32,9 +32,9 @@ public class ScheduledAction {
 
     @Scheduled(fixedDelayString = "${telegram.bot.notification.period}" )
     public void checkSneakerPrices(){
-        List<FavoriteChangedDTO> favoriteChangedDTOList = this.favoriteService.getFavoriteChanged();
-        if (!favoriteChangedDTOList.isEmpty()){
-            this.telegramNotificationService.sendNotification(favoriteChangedDTOList);
+        List<OffersDTO> offersDTOList = this.favoriteService.getFavoriteChanged();
+        if (!offersDTOList.isEmpty()){
+            this.telegramNotificationService.sendNotification(offersDTOList);
         }
 
     }

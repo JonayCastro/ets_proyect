@@ -6,6 +6,7 @@ import { AuthGuard } from './auth/guard/guards.guard';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 import { SneakersListComponent } from './components/sneakers-list/sneakers-list.component';
 import { FavoritesListComponent } from './components/favorites-list/favorites-list.component';
+import { OffersListComponent } from './components/offers-list/offers-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
       { path: 'subscription', component: SubscriptionComponent},
       { path: '', redirectTo: 'products', pathMatch: 'full' },
       { path: 'products', component: SneakersListComponent },
-      { path: 'favorites', component: FavoritesListComponent }
+      { path: 'favorites', component: FavoritesListComponent },
+      { path: 'offers', component: OffersListComponent}
     ]
   },
   { path: '**', redirectTo: 'login' }

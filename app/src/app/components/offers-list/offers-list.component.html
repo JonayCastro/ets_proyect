@@ -1,0 +1,11 @@
+<div class="offer-list-container">
+  <div class="empty-list-message" *ngIf="!offersDtoList?.length">
+    <h2>La lista está vacía</h2>
+  </div>
+  <div class="offer-grid">
+    <app-offers-detail
+      *ngFor="let offerDto of offersDtoList"
+      [offerDto]="offerDto">
+    </app-offers-detail>
+  </div>
+</div>

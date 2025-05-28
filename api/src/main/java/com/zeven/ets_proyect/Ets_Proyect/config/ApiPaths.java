@@ -10,10 +10,12 @@ public class ApiPaths {
     public static final String FILTERED_PATH = "/filtered";
     public static final String LIST_PATH = "/list";
     public static final String LOGIN_PATH = "/login";
+    public static final String OFFERS_PATH = "/offers";
     public static final String PRICE_PATH = "/price";
     public static final String REMOVE_PATH = "/remove";
     public static final String SNEAKERS_PATH = "/sneakers";
     public static final String STORED_PRODUCTS = "/stored-products";
     public static final String SUPPLIER_DATA_PATH = "/supplier-data";
     public static final String USERS_PATH = "/users";
+
 }

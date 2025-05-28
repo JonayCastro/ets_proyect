@@ -33,6 +33,21 @@ public class FavoritesController {
         }
     }
 
+    @GetMapping(path = ApiPaths.OFFERS_PATH)
+    public ResponseEntity<?> getOffers() {
+        return ResponseEntity.ok(favoriteService.getFavoriteChanged());
+    }
+
+    @PostMapping(path = ApiPaths.OFFERS_PATH + ApiPaths.FILTERED_PATH + ApiPaths.BRAND_PATH)
+    public ResponseEntity<?> getOffersByName(@RequestBody FilterDTO filterDTO) {
+        return ResponseEntity.ok(favoriteService.getFavoriteChangedByName(filterDTO));
+    }
+
+    @PostMapping(path = ApiPaths.OFFERS_PATH + ApiPaths.FILTERED_PATH + ApiPaths.PRICE_PATH)
+    public ResponseEntity<?> getOffersByPriceRange(@RequestBody FilterDTO filterDTO) {
+        return ResponseEntity.ok(favoriteService.getFavoriteChangedByPriceRange(filterDTO));
+    }
+
     @PostMapping(path = ApiPaths.FILTERED_PATH + ApiPaths.BRAND_PATH)
     public ResponseEntity<?> listFavoriteByName(@RequestBody FilterDTO filterDTO) {
         try {

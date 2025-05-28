@@ -1,19 +1,20 @@
 export default class Paths {
 
-    public static ACCOUNT_PATH: string = "account";
-    public static ADD_PATH: string = "add";
-    public static API_BASE_URL: string = "http://localhost";
-    public static API_PORT: number = 8888;
-    public static BRAND_PATH = "brand";
-    public static CREATE_PATH: string = "create";
-    public static FAVORITE_PATH: string = "favorites";
-    public static FILTERED_PATH = "filtered";
-    public static LIST_PATH: string = "list";
-    public static LOGIN_PATH: string = "login";
-    public static PRICE_PATH = "price";
-    public static REMOVE_PATH: string = "remove";
-    public static SNEAKERS_PATH: string = "sneakers";
-    public static STORED_PRODUCTS_PATH: string = "stored-products"
-    public static SUPPLIER_DATA_PATH: string = "supplier-data";
-    public static USERS_PATH: string = "users";
+    public static readonly ACCOUNT_PATH: string = "account";
+    public static readonly ADD_PATH: string = "add";
+    public static readonly API_BASE_URL: string = "http://localhost";
+    public static readonly API_PORT: number = 8888;
+    public static readonly BRAND_PATH = "brand";
+    public static readonly CREATE_PATH: string = "create";
+    public static readonly FAVORITE_PATH: string = "favorites";
+    public static readonly FILTERED_PATH = "filtered";
+    public static readonly LIST_PATH: string = "list";
+    public static readonly LOGIN_PATH: string = "login";
+    public static readonly OFFERS_PATH: string = "offers";
+    public static readonly PRICE_PATH = "price";
+    public static readonly REMOVE_PATH: string = "remove";
+    public static readonly SNEAKERS_PATH: string = "sneakers";
+    public static readonly STORED_PRODUCTS_PATH: string = "stored-products"
+    public static readonly SUPPLIER_DATA_PATH: string = "supplier-data";
+    public static readonly USERS_PATH: string = "users";
 }

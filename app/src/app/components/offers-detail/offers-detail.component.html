@@ -1,0 +1,16 @@
+<mat-card class="offer-card" appearance="outlined">
+    <div class="image-container">
+        <img src="assets/generic-sneker-img.jpg" alt="{{ offerDto.sneakerName }}" />
+    </div>
+    <mat-card-content>
+        <div class="info-container">
+            <p class="snaker-brand">{{ offerDto.brand }}</p>
+            <div class="snaker-name-container">
+                <p class="offer-name">{{ offerDto.sneakerName }}</p>
+            </div>
+            <p class="old-price">{{ offerDto.oldPrice | currency: 'EUR' }}</p>
+            <p class="new-price">{{ offerDto.newPrice | currency: 'EUR' }} Oferta</p>
+            <a href="{{offerLink}}" target="_blank">Ver</a>
+        </div>
+    </mat-card-content>
+</mat-card>
