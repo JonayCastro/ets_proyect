@@ -1,8 +1,11 @@
 <mat-nav-list>
-    <a mat-list-item routerLink="/dashboard/products" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">Productos</a>
-    <a mat-list-item routerLink="/dashboard/favorites" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">Favoritos</a>
-    <a mat-list-item routerLink="/dashboard/offers" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">Ofertas</a>
+    <a routerLink="/dashboard/products" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+    <mat-list-item>Productos</mat-list-item>
+  </a>
+  <a routerLink="/dashboard/favorites" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+    <mat-list-item>Favoritos</mat-list-item>
+  </a>
+  <a routerLink="/dashboard/offers" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+    <mat-list-item>Ofertas</mat-list-item>
+  </a>
 </mat-nav-list>
