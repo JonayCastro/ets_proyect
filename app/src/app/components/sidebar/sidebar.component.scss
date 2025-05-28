@@ -1,19 +1,27 @@
 @use '../../../styles/variables' as *;
 
 mat-nav-list {
-    padding: 10px;
-  
-    a {
-      color: $text-color;
-      font-weight: 500;
-      
-      &:hover {
-        background-color: lighten($primary-color, 40%);
-      }
-    }
-    .active-link {
-        font-weight: bold;
-        color: #1976d2;
-      }
+  padding: 10px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
-  
+
+  a mat-list-item {
+    transition: background-color 0.3s ease;
+  }
+
+  a:hover mat-list-item {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+
+  .active-link mat-list-item {
+    background-color: #e0f2f1;
+    font-weight: bold;
+    border-left: 4px solid #26a69a;
+  }
+
+}
