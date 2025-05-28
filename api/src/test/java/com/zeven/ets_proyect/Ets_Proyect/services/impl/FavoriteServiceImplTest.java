@@ -92,7 +92,7 @@ class FavoriteServiceImplTest {
         when(favoriteSneakersRepositoryMock.save(mockFavoriteSneakerMapeado)).thenReturn(mockFavoriteSneakerGuardado);
 
         
-        favoriteService.addFavoriteBySneakerId(sneakerStoredId, userIdProporcionado);
+        favoriteService.addFavoriteBySneakerId(sneakerStoredId);
 
        
         verify(userServiceMock).findUserById(userIdProporcionado);
