@@ -14,6 +14,8 @@ public interface FavoriteService {
     void addFavoriteBySneakerId(Long sneakerStoredId);
     void deleteFavoriteById(Long favoriteSneakerId);
     List<FavoriteChangedDTO> getFavoriteChanged();
+    List<FavoriteChangedDTO> getFavoriteChangedByName(FilterDTO filterDTO);
+    List<FavoriteChangedDTO> getFavoriteChangedByPriceRange(FilterDTO filterDTO);
     List<FavoriteSneakerDTO> getFavoritesList();
     List<FavoriteSneakerDTO> getFavoritesListByBrand(FilterDTO filterDto);
     List<FavoriteSneakerDTO> getFavoritesListByPrice(FilterDTO filterDto);

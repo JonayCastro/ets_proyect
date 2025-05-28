@@ -13,6 +13,7 @@ public class FavoriteChangedDTO {
     private Long userId;
     private Integer oldPrice;
     private String sneakerName;
+    private String brand;
     private String link;
     private Integer newPrice;
     private String userName;

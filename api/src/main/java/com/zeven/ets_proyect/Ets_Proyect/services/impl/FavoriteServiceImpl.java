@@ -95,6 +95,19 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
+    public List<FavoriteChangedDTO> getFavoriteChangedByName(FilterDTO filterDTO) {
+        String brandName = filterDTO.getBrandFilter();
+        return this.favoriteSneakersRepository.findFavoriteChangedByName(brandName);
+    }
+
+    @Override
+    public List<FavoriteChangedDTO> getFavoriteChangedByPriceRange(FilterDTO filterDTO) {
+        Integer minPrice = filterDTO.getMinPriceFilter();
+        Integer maxPrice = filterDTO.getMaxPriceFilter();
+        return this.favoriteSneakersRepository.findFavoriteChangedByPriceRange(minPrice, maxPrice);
+    }
+
+    @Override
     public List<FavoriteSneakerDTO> getFavoritesList() {
         List<FavoriteSneaker> favoriteSneakers = (List<FavoriteSneaker>) this.favoriteSneakersRepository.findAll();
 
