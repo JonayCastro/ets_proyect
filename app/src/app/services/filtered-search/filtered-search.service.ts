@@ -7,6 +7,7 @@ import Utils from '../../utils/utils';
 import Paths from '../../config/paths';
 import FavoriteDTO from '../../dto/favorite-dto';
 import Filters from '../../config/filters/filter';
+import OffersDTO from '../../dto/offers-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,16 @@ import Filters from '../../config/filters/filter';
 export class FilteredSearchService {
 
   constructor(private http: HttpClient) { }
+
+  public getFilteredOffers(): Observable<OffersDTO[]> {
+    const storedFilters: FiltersDTO = this.getStoredFiltered();
+    let basePathsList: string[] = [Paths.FAVORITE_PATH, Paths.OFFERS_PATH, Paths.FILTERED_PATH];
+    const pathList: string[] = this.addFilterType(basePathsList, storedFilters.key!);
+    const url: string = Utils.urlConstructorWithoutId({
+      paths: pathList
+    });
+    return this.http.post<OffersDTO[]>(url, storedFilters, { observe: 'body' });
+  }
 
   public getFilteredSneakersList(): Observable<SneakerDTO[]> {
 

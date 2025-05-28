@@ -2,8 +2,8 @@ package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
 import com.zeven.ets_proyect.Ets_Proyect.config.ApiMessage;
 import com.zeven.ets_proyect.Ets_Proyect.dto.FilterDTO;
-import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteChangedDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteSneakerDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.OffersDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakerDTO;
 import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.SneakersDataDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.FavoriteSneaker;
@@ -85,23 +85,23 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
-    public List<FavoriteChangedDTO> getFavoriteChanged() {
+    public List<OffersDTO> getFavoriteChanged() {
         /**
          * This method retrieves a list of favorite sneakers that have been changed from the repository.
-         * It returns a list of FavoriteChangedDTO objects, which contain information about the changed favorites.
-         * @return A list of FavoriteChangedDTO objects representing the changed favorites.
+         * It returns a list of OffersDTO objects, which contain information about the changed favorites.
+         * @return A list of OffersDTO objects representing the changed favorites.
          */
         return this.favoriteSneakersRepository.findTopFavoriteChanged();
     }
 
     @Override
-    public List<FavoriteChangedDTO> getFavoriteChangedByName(FilterDTO filterDTO) {
+    public List<OffersDTO> getFavoriteChangedByName(FilterDTO filterDTO) {
         String brandName = filterDTO.getBrandFilter();
         return this.favoriteSneakersRepository.findFavoriteChangedByName(brandName);
     }
 
     @Override
-    public List<FavoriteChangedDTO> getFavoriteChangedByPriceRange(FilterDTO filterDTO) {
+    public List<OffersDTO> getFavoriteChangedByPriceRange(FilterDTO filterDTO) {
         Integer minPrice = filterDTO.getMinPriceFilter();
         Integer maxPrice = filterDTO.getMaxPriceFilter();
         return this.favoriteSneakersRepository.findFavoriteChangedByPriceRange(minPrice, maxPrice);

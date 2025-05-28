@@ -27,6 +27,8 @@ import { FavoriteDetailComponent } from './components/favorite-detail/favorite-d
 import { MatSelectModule } from '@angular/material/select';
 import { FilterComponent } from './components/filter/filter.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { OffersListComponent } from './components/offers-list/offers-list.component';
+import { OffersDetailComponent } from './components/offers-detail/offers-detail.component';
 
 /**
  * AppModule is the main module of the application.
@@ -51,7 +53,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     SneakersListComponent,
     FavoritesListComponent,
     FavoriteDetailComponent,
-    FilterComponent
+    FilterComponent,
+    OffersListComponent,
+    OffersDetailComponent
   ],
   imports: [
     BrowserModule,

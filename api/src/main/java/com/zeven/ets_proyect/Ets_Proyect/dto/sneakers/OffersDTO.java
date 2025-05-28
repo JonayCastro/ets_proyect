@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FavoriteChangedDTO {
+public class OffersDTO {
 
     private Long userId;
     private Integer oldPrice;

@@ -1,6 +1,6 @@
 package com.zeven.ets_proyect.Ets_Proyect.repositories;
 
-import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteChangedDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.OffersDTO;
 import com.zeven.ets_proyect.Ets_Proyect.entities.FavoriteSneaker;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -26,7 +26,7 @@ public interface FavoriteSneakersRepository extends CrudRepository<FavoriteSneak
         ORDER BY (f.price - s.price) DESC
         LIMIT 1
         """, nativeQuery = true)
-    List<FavoriteChangedDTO> findTopFavoriteChanged();
+    List<OffersDTO> findTopFavoriteChanged();
 
     @Query(value = """
         SELECT f.user_id AS userId,
@@ -44,7 +44,7 @@ public interface FavoriteSneakersRepository extends CrudRepository<FavoriteSneak
           AND (LOWER(s.name) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(s.brand) LIKE LOWER(CONCAT('%', :query, '%')))
         ORDER BY (f.price - s.price) DESC
         """, nativeQuery = true)
-    List<FavoriteChangedDTO> findFavoriteChangedByName(@Param("query") String query);
+    List<OffersDTO> findFavoriteChangedByName(@Param("query") String query);
 
     @Query(value = """
         SELECT f.user_id AS userId,
@@ -63,8 +63,8 @@ public interface FavoriteSneakersRepository extends CrudRepository<FavoriteSneak
           AND s.price <= :maxPrice
         ORDER BY (f.price - s.price) DESC
         """, nativeQuery = true)
-    List<FavoriteChangedDTO> findFavoriteChangedByPriceRange(@Param("minPrice") Integer minPrice,
-                                                             @Param("maxPrice") Integer maxPrice);
+    List<OffersDTO> findFavoriteChangedByPriceRange(@Param("minPrice") Integer minPrice,
+                                                    @Param("maxPrice") Integer maxPrice);
 
     List<FavoriteSneaker> findByBrandContainingIgnoreCase(String brand);
     List<FavoriteSneaker> findByPriceBetween(Integer minPrice, Integer maxPrice);

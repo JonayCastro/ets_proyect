@@ -1,6 +1,6 @@
 package com.zeven.ets_proyect.Ets_Proyect.services.impl;
 
-import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.FavoriteChangedDTO;
+import com.zeven.ets_proyect.Ets_Proyect.dto.sneakers.OffersDTO;
 import com.zeven.ets_proyect.Ets_Proyect.services.NotificationServices;
 import com.zeven.ets_proyect.Ets_Proyect.utils.TelegramBot;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class TelegramNotificationService implements NotificationServices <FavoriteChangedDTO> {
+public class TelegramNotificationService implements NotificationServices <OffersDTO> {
 
     @Value("${supplier.sneaker.base.product.url}")
     private String baseSupplierUrl;
@@ -28,15 +28,15 @@ public class TelegramNotificationService implements NotificationServices <Favori
     }
 
     @Override
-    public void sendNotification(List<FavoriteChangedDTO> favoriteChangedDTO) {
+    public void sendNotification(List<OffersDTO> offersDTO) {
         /**
          * This method sends notifications to users about changes in their favorite sneakers.
-         * It iterates through the list of FavoriteChangedDTO objects and builds a message for each user.
+         * It iterates through the list of OffersDTO objects and builds a message for each user.
          * The messages are then sent to the respective users using the TelegramBot service.
          */
         Map<Long, String> messages = new HashMap<>();
 
-        favoriteChangedDTO.forEach((favoriteChanged) -> {
+        offersDTO.forEach((favoriteChanged) -> {
             Long chatId = favoriteChanged.getChatId();
             String message = this.buildMessage(favoriteChanged);
             messages.put(chatId, message);
@@ -47,21 +47,21 @@ public class TelegramNotificationService implements NotificationServices <Favori
     }
 
     @Override
-    public String buildMessage(FavoriteChangedDTO favoriteChangedDTO) {
+    public String buildMessage(OffersDTO offersDTO) {
         /**
-         * This method builds a message for a user based on the information in the FavoriteChangedDTO object.
+         * This method builds a message for a user based on the information in the OffersDTO object.
          * It retrieves the user's name, sneaker name, old price, new price, and link to the sneaker.
          * The message is formatted using MessageFormat to create a user-friendly notification.
          *
-         * @param favoriteChangedDTO The FavoriteChangedDTO object containing the information for the message.
+         * @param offersDTO The OffersDTO object containing the information for the message.
          *
          * @return A formatted message string for the user.
          */
-        String userName = favoriteChangedDTO.getUserName();
-        String sneakerName = favoriteChangedDTO.getSneakerName();
-        String link = favoriteChangedDTO.getLink();
-        String oldPrice = Integer.toString(favoriteChangedDTO.getOldPrice());
-        String newPrice = Integer.toString(favoriteChangedDTO.getNewPrice());
+        String userName = offersDTO.getUserName();
+        String sneakerName = offersDTO.getSneakerName();
+        String link = offersDTO.getLink();
+        String oldPrice = Integer.toString(offersDTO.getOldPrice());
+        String newPrice = Integer.toString(offersDTO.getNewPrice());
 
         return MessageFormat.format(
                 "Hola, {0}.\n⚠\uFE0F Tu zapatilla \"{1}\"\nha bajado de {2}€ a {3}€.\nVer aquí: {4}{5}",
