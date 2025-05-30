@@ -11,17 +11,38 @@ mat-nav-list {
 
   a mat-list-item {
     transition: background-color 0.3s ease;
+
   }
 
   a:hover mat-list-item {
-    background-color: #f1f1f1;
+    background-color: $sidebar-press-button-color;
     cursor: pointer;
   }
 
   .active-link mat-list-item {
-    background-color: #e0f2f1;
+    background-color: $sidebar-active-button-color;
     font-weight: bold;
-    border-left: 4px solid #26a69a;
+    border-left: 4px solid $sidebar-button-color;
+    
   }
-
+/*AYUDA!!!!
+  .nav-item-productos{
+    .mdc-list-item__primary-text {
+        color: white !important;
+    
+  }
+  }
+  .nav-item-favoritos{
+    .mdc-list-item__primary-text {
+        color: white !important;
+  
+  }
+  }
+  .nav-item-ofertas {
+    .mdc-list-item__primary-text {
+      color: white !important;
+  
+  }
+}
+*/
 }

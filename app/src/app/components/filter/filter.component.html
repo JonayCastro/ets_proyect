@@ -29,8 +29,8 @@
       </mat-select>
     </mat-form-field>
     <div class="btn-container">
-      <button [disabled]="!hasAnyFilter()" mat-raised-button color="primary" (click)="filterList()">Filtar</button>
-      <button mat-raised-button color="primary" (click)="clearFilters()">Limpiar Filtros</button>
+      <button [disabled]="!hasAnyFilter()" mat-raised-button class="custom-filter-button" (click)="filterList()">Filtrar</button>
+      <button mat-raised-button class="custom-clear-button" (click)="clearFilters()">Limpiar Filtros</button>
     </div>
   </div>
 </div>
