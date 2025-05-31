@@ -1,6 +1,6 @@
 <mat-card class="favorite-card" appearance="outlined">
     <div class="image-container">
-        <img src="assets/generic-sneker-img.jpg" alt="{{ favoriteDto.name }}" />
+        <img [src]="imageSrc" alt="{{ favoriteDto.name }}" />
     </div>
     <mat-card-content>
         <div class="info-container">

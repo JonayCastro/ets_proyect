@@ -15,6 +15,8 @@ export class SneakerDetailComponent implements OnInit {
   @Input() sneakerDto!: SneakerDTO;
   sneakerLink: string = '';
   baseUrl: string = AppConstants.SNEAKER_BASE_URL;
+  baseImageUrl: string = AppConstants.IMAGE_BASE_URL_PATH;
+  imageSrc: string = '';
   private _snackBar = inject(MatSnackBar);
   
 
@@ -22,6 +24,7 @@ export class SneakerDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.sneakerLink = this.baseUrl + this.sneakerDto.link;
+    this.imageSrc = this.baseImageUrl + this.sneakerDto.image;
   }
 
   addFavorite(sneakerId: number): void {

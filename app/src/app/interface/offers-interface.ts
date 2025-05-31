@@ -4,6 +4,7 @@ export default interface OffersInterface {
     oldPrice: number;
     sneakerName: string;
     brand: string;
+    image: string;
     link: string;
     newPrice: number;
     userName: string;
