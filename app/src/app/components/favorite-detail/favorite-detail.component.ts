@@ -15,6 +15,8 @@ export class FavoriteDetailComponent {
   @Input() favoriteDto!: FavoriteDTO;
   favoriteLink: string = '';
   baseUrl: string = AppConstants.SNEAKER_BASE_URL;
+  baseImageUrl: string = AppConstants.IMAGE_BASE_URL_PATH;
+  imageSrc: string = '';
   private _snackBar = inject(MatSnackBar);
   
 
@@ -22,6 +24,8 @@ export class FavoriteDetailComponent {
 
   ngOnInit(): void {
     this.favoriteLink = this.baseUrl + this.favoriteDto.link;
+    this.imageSrc = this.baseImageUrl + this.favoriteDto.image;
+
   }
 
   removeFavorite(favoriteId: number): void {

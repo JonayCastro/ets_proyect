@@ -12,8 +12,12 @@ export class OffersDetailComponent implements OnInit {
   @Input() offerDto: OffersDTO = new OffersDTO({});
   offerLink: string = '';
   baseUrl: string = AppConstants.SNEAKER_BASE_URL;
+  baseImageUrl: string = AppConstants.IMAGE_BASE_URL_PATH;
+  imageSrc: string = '';
 
   ngOnInit(): void {
     this.offerLink = this.baseUrl + this.offerDto.link;
+    this.imageSrc = this.baseImageUrl + this.offerDto.image;
+
   }
 }

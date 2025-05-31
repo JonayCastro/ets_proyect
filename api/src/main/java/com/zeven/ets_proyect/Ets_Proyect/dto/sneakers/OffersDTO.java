@@ -14,6 +14,7 @@ public class OffersDTO {
     private Integer oldPrice;
     private String sneakerName;
     private String brand;
+    private String image;
     private String link;
     private Integer newPrice;
     private String userName;

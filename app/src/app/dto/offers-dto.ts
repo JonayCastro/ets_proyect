@@ -5,6 +5,7 @@ export default class OffersDTO implements OffersInterface {
     oldPrice: number;
     sneakerName: string;
     brand: string;
+    image: string;
     link: string;
     newPrice: number;
     userName: string;
@@ -15,6 +16,7 @@ export default class OffersDTO implements OffersInterface {
         this.oldPrice = data.oldPrice || 0;
         this.sneakerName = data.sneakerName || '';
         this.brand = data.brand || '';
+        this.image = data.image || '';
         this.link = data.link || '';
         this.newPrice = data.newPrice || 0;
         this.userName = data.userName || '';
