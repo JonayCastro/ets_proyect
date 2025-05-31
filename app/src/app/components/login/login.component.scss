@@ -3,6 +3,7 @@
 .app-icon-container {
   margin-top: 5vh;
   text-align: center;
+
   img {
     width: 100px;
     height: 100px;
@@ -25,5 +26,24 @@
     color: $light-primary-color;
     background-color: $primary-color;
   }
+
+  mat-form-field {
+    position: relative;
+
+    button[mat-icon-button][matSuffix] {
+      background: transparent !important;
+      box-shadow: none !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+
+      mat-icon {
+        font-size: 24px;
+        color: $primary-color;
+      }
+    }
+  }
 }
-  

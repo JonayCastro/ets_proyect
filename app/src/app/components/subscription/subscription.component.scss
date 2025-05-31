@@ -20,11 +20,29 @@
     h3 {
       margin-bottom: 12px;
       font-weight: 500;
-      color:$light-primary-color;
+      color: $light-primary-color;
     }
 
     .action-button {
       width: 100%;
+      font-weight: 600;
+      &.mat-primary {
+        background-color: $primary-color;
+        color: $light-primary-color;
+
+        &:hover {
+          background-color: $hover-background-color;
+        }
+      }
+
+      &.mat-warn {
+        background-color: $warn-color;
+        color: $light-primary-color;
+
+        &:hover {
+          background-color: darken($warn-color, 10%);
+        }
+      }
     }
   }
 
