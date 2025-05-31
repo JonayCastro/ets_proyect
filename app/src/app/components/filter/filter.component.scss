@@ -1,26 +1,38 @@
 @use '../../../styles/variables' as *;
 
 .filter-container {
-  background-color: $card-color;
+  background-color: $dark-primary-color;
   margin-bottom: 2vh;
   padding: 10px;
   border-radius: 16px;
-
+  color: $light-primary-color;
   .ctrl-filter {
     display: flex;
     flex-direction: row;
     vertical-align: middle;
     gap: 10px;
+   
 
     > div:not([hidden]) {
       display: flex;
       gap: 10px;
       align-items: center;
+      
     }
   }
 
   .btn-container {
+    
     display: flex;
     justify-content: center;
   }
+  
+  .custom-clear-button {
+      background-color: $primary-color; 
+      color: $light-primary-color; 
+    }
+  .mat-mdc-raised-button {
+      background-color: $primary-color; 
+       color: $light-primary-color;;
+    }
 }

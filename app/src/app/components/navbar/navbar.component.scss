@@ -3,10 +3,11 @@
 mat-toolbar {
     display: flex;
     justify-content: space-between;
-    background-color: $primary-color;
+    background-color: $nvar-color;
   
     .toolbar-title {
       font-weight: bold;
+      color: $light-primary-color;
     }
   
     mat-icon {

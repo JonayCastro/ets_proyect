@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as *;
+@use "../../../styles/variables" as *;
 
 mat-nav-list {
   padding: 10px;
@@ -14,14 +14,19 @@ mat-nav-list {
   }
 
   a:hover mat-list-item {
-    background-color: #f1f1f1;
+    background-color: $primary-color;
     cursor: pointer;
   }
 
   .active-link mat-list-item {
-    background-color: #e0f2f1;
+    background-color: $primary-color;
     font-weight: bold;
-    border-left: 4px solid #26a69a;
+    border-left: 4px solid $light-primary-color;
   }
-
+  a mat-list-item {
+    transition: background-color 0.3s ease;
+    p {
+      color: $light-primary-color;
+    }
+  }
 }
