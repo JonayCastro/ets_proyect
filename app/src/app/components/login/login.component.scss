@@ -13,7 +13,7 @@
   max-width: 400px;
   margin: 10px auto;
   padding: 20px;
-  background-color: $login-background-color;
+  background-color: $dark-primary-color;
 
   h2 {
     text-align: center;
@@ -22,8 +22,8 @@
 
   button {
     margin-top: 20px;
-    color: $login-button-text-color;
-    background-color: $login-button-color;
+    color: $light-primary-color;
+    background-color: $primary-color;
   }
 }
   

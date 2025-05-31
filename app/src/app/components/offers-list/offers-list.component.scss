@@ -4,12 +4,13 @@
   display: flex;
   justify-content: center;
   margin-top: 20vh;
-  color: $text-color;
+  color: $light-primary-color;
   height: 100vh;
 }
 
 .offer-list-container {
   background-color: $background-color;
+  height: 100vh;
 
   .offer-grid {
     display: grid;

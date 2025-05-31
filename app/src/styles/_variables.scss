@@ -1,22 +1,25 @@
 // src/styles/_variables.scss
 
 $primary-color: #00ADB5;
-$accent-color: #ffffff;
-$warn-color: #B8001F;
-$background-color: #000000;
+
+$light-primary-color: #ffffff;
+
+//dark primary colors
+$dark-primary-color: #393E46;
 $card-color: #393E46;
-$text-color: #ffffff;
 $nvar-color:#393E46;
-$sidebar-press-button-color: #ff00d4;
-$sidebar-active-button-color: #00ADB5;
-$sidebar-button-color: #EEEEEE;
-$sidebar-press-button-color: #00ADB5;
 $sidebar-background-color: #393E46;
-$sidebar-text-color: #ffffff;
-$login-color:black;
-$login-background-color: #393E46;
-$login-button-color: #00ADB5;
-$login-button-text-color: #ffffff;
-$filter-text-color: #ffffff;
-$filter-background-color: #393E46;
-$filter-button-color: #00ADB5;
+
+//black colors
+$login-color:#0d1117;
+$background-color: #0d1117;
+
+$warn-color: #B8001F;
+
+$sidebar-press-button-color: #ff00d4;
+
+
+
+
+
+
