@@ -1,15 +1,11 @@
 @use '../../../styles/variables' as *;
 
-.empty-list-message {
-  display: flex;
-  justify-content: center;
-  margin-top: 20vh;
-  color: $light-primary-color;
-  height: 100vh;
-}
-
 .sneaker-list-container {
   background-color: $background-color;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 
   .sneaker-grid {
     display: grid;
@@ -17,4 +13,12 @@
     gap: 1.5rem;
     justify-items: center;
   }
+}
+
+.empty-list-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: $light-primary-color;
 }

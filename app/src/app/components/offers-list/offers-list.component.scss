@@ -1,21 +1,25 @@
 @use '../../../styles/variables' as *;
 
-.empty-list-message {
-  display: flex;
-  justify-content: center;
-  margin-top: 20vh;
-  color: $light-primary-color;
-  height: 100vh;
-}
-
 .offer-list-container {
   background-color: $background-color;
-  height: 100vh;
+  flex: 1; // ocupa el alto disponible
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 
   .offer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
     justify-items: center;
+    padding: 1rem;
   }
+}
+
+.empty-list-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; // centra verticalmente dentro del contenedor
+  color: $light-primary-color;
 }

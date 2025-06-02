@@ -1,21 +1,25 @@
 @use '../../../styles/variables' as *;
 
-.empty-list-message {
-  display: flex;
-  justify-content: center;
-  margin-top: 20vh;
-  color: $light-primary-color;
-  height: 100vh;
-}
-
 .favorite-list-container {
   background-color: $background-color;
-  height: 100vh;
+  flex: 1; // ocupar el alto disponible del contenedor padre
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 
   .favorite-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
     justify-items: center;
+    padding: 1rem; // opcional: para dar algo de margen
   }
+}
+
+.empty-list-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; // centra verticalmente respecto al contenedor padre
+  color: $light-primary-color;
 }
