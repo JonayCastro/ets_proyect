@@ -1,14 +1,38 @@
 @use '../../../styles/variables' as *;
 
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.dashboard-container {
+  flex: 1;
+  display: flex;
+  height: 100%;
+}
+
+mat-sidenav {
+  background-color: $sidebar-background-color;
+}
+
+mat-sidenav-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 40px;
   background-color: $background-color;
+  box-sizing: border-box;
 }
-.mat-drawer {
-  background-color: $sidebar-background-color;
-   
-}
+
 .mat {
   color: $primary-color;
-
 }
